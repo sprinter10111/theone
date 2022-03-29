@@ -1,4 +1,4 @@
-function shuffle(array ){
+function shuffle(array ){//gooit de antwoorden door elkaar
     let currentIndex  = array.length;
     let randomIndex ;
     while (currentIndex != 0){
@@ -11,70 +11,15 @@ function shuffle(array ){
     return array;
 }
 
-    // const characterResponse = await axios.get("https://the-one-api.dev/v2/character", {headers: {"Authorization" : 'bearer gAAIgrTSktkemLaiBud2'}});
-    // const response[1]  = characterResponse.data;
-    // const movieResponse = await axios.get("https://the-one-api.dev/v2/movie", {headers: {"Authorization" : 'bearer gAAIgrTSktkemLaiBud2'}});
-    // const response[2]  = movieResponse.data;
-    // const button = document.getElementsByTagName("button");
-    // console.log(response[2]);
-    // let score  = 0; 
-    // for(let i  = 0;i<10;i++){
-    //     let quoteIndex  = Math.floor(Math.random() * quoteData.docs.length);
-    //     let quote  = quoteData.docs[quoteIndex];
-    //     console.log(`Quote: "${quote.dialog}"`);
-    //     console.log("Van wie is deze quote?\n");
-    //     let character  = {_id:"",height:"",race:"",gender:"",birth:"",spouse:"",death:"",realm:"",hair:"",name:"",wikiUrl:""};
-    //     for(let i = 0;i<response[1].docs.length;i++){
-    //         if (response[1].docs[i]._id === quote.character){
-    //             character = response[1].docs[i];
-    //         }
-    //     }
-    //     let characters = [character, response[1].docs[Math.floor(Math.random() * response[1].docs.length)], response[1].docs[Math.floor(Math.random() * response[1].docs.length)]];
-    //     shuffle(characters);
-    //     for(let i = 0;i<characters.length;i++){
-    //         console.log(characters[i].name);
-    //     }
-    //     let antwoordCharacter = ""
-    //     if(antwoordCharacter.toLowerCase() === character.name.toLowerCase()){
-    //         console.log(`Correct! ${character.name} was het juiste antwoord.\n`);
-    //         score++;
-    //     }else{
-    //         console.log(`Fout! ${character.name} was het juiste antwoord.\n`);
-    //     }
-
-    //     console.log("Van welke film is deze quote?\n");
-    //     let movie  = {_id:"",name:"",runtimeInMinutes:0,budgetInMillions:0,boxOfficeRevenueInMillions:0,academyAwardNominations:0,academyAwardWins:0,rottenTomatoesScore:0};
-    //     for(let i  = 0;i<response[2].docs.length;i++){
-    //         if (response[2].docs[i]._id === quote.movie){
-    //             movie = response[2].docs[i];
-    //         }
-    //     }
-    //     let movies = [movie, response[2].docs[Math.floor(Math.random() * response[2].docs.length)], response[2].docs[Math.floor(Math.random() * response[2].docs.length)]];
-    //     shuffle(movies);
-    //     for(let i = 0;i<movies.length;i++){
-    //         console.log(movies[i].name);
-    //     }
-    //     let antwoordMovie = "";
-    //     if(antwoordMovie.toLowerCase().trim() === movie.name.toLowerCase().trim()){
-    //         console.log(`Correct! ${movie.name} was het juiste antwoord.\n`);
-    //         score++;
-    //     }else{
-    //         console.log(`Fout! ${movie.name} was het juiste antwoord.\n`);
-    //     }
-    // }
-    // console.log(`Je totaalscore was ${score/2.0}`);
 let score = 0;
 let rounds = 0;
-let lastQuoteIndex = 0;
+let lastQuoteIndex = 0;//index van de vorige quote (voor oplossingen te checken)
+if(rounds === 0){ // verandert tekst van de submit knop (enkel voor de start van de quiz)
+    document.getElementById("submit").textContent = "start"
+}
 
-document.getElementById("finish").style.display = "none";
 const TienRonden = () => {
-    document.getElementById("finish").style.display = "none";
     rounds++;
-    // if(rounds === 10){
-    //     document.getElementById("finish").style.display = "block";
-    //     document.getElementById("submit").style.display = "none";
-    // }
     const quoteFetch = fetch("https://the-one-api.dev/v2/quote", {headers: {"Authorization" : 'bearer gAAIgrTSktkemLaiBud2'}})
     .then((response) => {return response.json();})
     const characterFetch = fetch("https://the-one-api.dev/v2/character", {headers: {"Authorization" : 'bearer gAAIgrTSktkemLaiBud2'}})
@@ -84,7 +29,7 @@ const TienRonden = () => {
     const Data = Promise.all([quoteFetch,characterFetch,movieFetch])
     Data.then((response) => {
         let inputElements = document.getElementsByTagName("input");
-        if(rounds>0){    
+        if(rounds>0){   // controleert antwoorden en verhoogt score indien nodig 
             let lastQuote = response[0].docs[lastQuoteIndex];
             let lastCharacter  = {_id:"",height:"",race:"",gender:"",birth:"",spouse:"",death:"",realm:"",hair:"",name:"",wikiUrl:""};
             for(let i = 0;i<response[1].docs.length;i++){
@@ -107,28 +52,29 @@ const TienRonden = () => {
             }    
         }
         let article = document.getElementsByTagName("article");
-        article[1].remove();
+        article[1].remove(); // verwijdert het article van de vorige vraag om plaats te maken voor de nieuwe
         if(rounds<=10){
             let quoteIndex = Math.floor(Math.random() * response[0].docs.length);
             lastQuoteIndex = quoteIndex;
             let quote = response[0].docs[quoteIndex];
             let character  = {_id:"",height:"",race:"",gender:"",birth:"",spouse:"",death:"",realm:"",hair:"",name:"",wikiUrl:""};
-            for(let i = 0;i<response[1].docs.length;i++){
+            for(let i = 0;i<response[1].docs.length;i++){// zoekt het character dat bij de quote hoort
                 if (response[1].docs[i]._id === quote.character){
                     character = response[1].docs[i];
                 }
             }
-            let characters = [character, response[1].docs[Math.floor(Math.random() * response[1].docs.length)], response[1].docs[Math.floor(Math.random() * response[1].docs.length)]];
+            let characters = [character, response[1].docs[Math.floor(Math.random() * response[1].docs.length)], response[1].docs[Math.floor(Math.random() * response[1].docs.length)]];//array met correcte antwoorden en 2 random characters
             // shuffle(characters);
             let movie  = {_id:"",name:"",runtimeInMinutes:0,budgetInMillions:0,boxOfficeRevenueInMillions:0,academyAwardNominations:0,academyAwardWins:0,rottenTomatoesScore:0};
-            for(let i  = 0;i<response[2].docs.length;i++){
+            for(let i  = 0;i<response[2].docs.length;i++){// zoekt de film die bij de quote hoort
                 if (response[2].docs[i]._id === quote.movie){
                     movie = response[2].docs[i];
                 }
             }
-            let movies = [movie, response[2].docs[Math.floor(Math.random() * response[2].docs.length)], response[2].docs[Math.floor(Math.random() * response[2].docs.length)]];
+            let movies = [movie, response[2].docs[Math.floor(Math.random() * response[2].docs.length)], response[2].docs[Math.floor(Math.random() * response[2].docs.length)]];//array met correcte antwoorden en 2 random filmen
             // shuffle(movies);
             let h2 = document.getElementsByTagName("h2");
+            //inserts html voor een nieuwe vraag
             article[0].insertAdjacentHTML("afterbegin",`<article><p>${quote.dialog}</p>
                 <p>Van welk personage komt deze quote?</p>
                 <input type="radio" id="character1" name="character" value="${characters[0].name}">
@@ -146,16 +92,13 @@ const TienRonden = () => {
                 <label for="character3">${movies[2].name}</label></article>`);
             console.log(score);
             console.log(rounds);
-        }if (rounds === 9){
+        }if (rounds === 10){//verander "submit" knop naar "finish" knop bij de laatste vraag
             let button = document.getElementById("submit");
             button.textContent = "Finish"
-        }if (rounds > 10){
+        }if (rounds > 10){// toont totaalscore na de laatste vraag
             article[0].insertAdjacentHTML("afterbegin",`<article>
             <h2><strong>Gefeliciteerd!</strong><h2>
             <p>je hebt een score van ${score}</p></article>`);
         }
     })
-}
-const checkRadiobuttons = () => {
-
 }
