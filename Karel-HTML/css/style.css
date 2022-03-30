@@ -9,7 +9,7 @@
 }
 body {
   height: 100vh;
-  background-image: url("/assets/map_middle-earth.jpg");
+  background-image: url("../assets/map_middle-earth.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;

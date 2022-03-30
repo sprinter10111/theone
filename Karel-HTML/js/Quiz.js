@@ -52,8 +52,8 @@ const TienRonden = () => {
                 }
             }    
         }
-        let articles = document.getElementsByClassName("");
-        articles[1].remove(); // verwijdert het article van de vorige vraag om plaats te maken voor de nieuwe
+        let articles = document.getElementsByClassName("vraag");
+        articles[0].remove(); // verwijdert het article van de vorige vraag om plaats te maken voor de nieuwe
         if(rounds<=10){
             let quoteIndex = Math.floor(Math.random() * response[0].docs.length);
             lastQuoteIndex = quoteIndex;
@@ -76,8 +76,8 @@ const TienRonden = () => {
             // shuffle(movies);
             let h2 = document.getElementsByTagName("h2");
             //inserts html voor een nieuwe vraag
-            let sections = document.getElementsByClassName("");
-            sections[0].insertAdjacentHTML("afterbegin",`<article><p>${quote.dialog}</p>
+            let sections = document.getElementsByClassName("TienRonden");
+            sections[0].insertAdjacentHTML("afterbegin",`<article class="vraag" ><p>${quote.dialog}</p>
                 <p>Van welk personage komt deze quote?</p>
                 <input type="radio" id="character1" name="character" value="${characters[0].name}">
                 <label for="character1">${characters[0].name}</label><br>
@@ -98,7 +98,7 @@ const TienRonden = () => {
             let button = document.getElementById("submit");
             button.textContent = "Finish"
         }if (rounds > 10){// toont totaalscore na de laatste vraag
-            articles[0].insertAdjacentHTML("afterbegin",`<article>
+            sections[0].insertAdjacentHTML("afterbegin",`<article>
             <h2><strong>Gefeliciteerd!</strong><h2>
             <p>je hebt een score van ${score}</p></article>`);
         }
@@ -108,28 +108,29 @@ const TienRonden = () => {
 const SuddenDeath = () => {
     rounds++;
     // if(rounds === 10){
-    //     document.getElementById("submit").style.display = "none";
-    // }
-    const quoteFetch = fetch("https://the-one-api.dev/v2/quote", {headers: {"Authorization" : 'bearer gAAIgrTSktkemLaiBud2'}})
-    .then((response) => {return response.json();})
-    const characterFetch = fetch("https://the-one-api.dev/v2/character", {headers: {"Authorization" : 'bearer gAAIgrTSktkemLaiBud2'}})
-    .then((response) => {return response.json();})
-    const movieFetch = fetch("https://the-one-api.dev/v2/movie", {headers: {"Authorization" : 'bearer gAAIgrTSktkemLaiBud2'}})
-    .then((response) => {return response.json();})
-    const Data = Promise.all([quoteFetch,characterFetch,movieFetch])
-    Data.then((response) => {
-        let inputElements = document.getElementsByTagName("input");
-        let article = document.getElementsByTagName("article");
-        if(rounds>0){    // indien er een ronde is geweest => controleert het antwoord
-            document.getElementById("submit").style.display = "block";
-            let lastQuote = response[0].docs[lastQuoteIndex];
-            let lastCharacter  = {_id:"",height:"",race:"",gender:"",birth:"",spouse:"",death:"",realm:"",hair:"",name:"",wikiUrl:""};
-            for(let i = 0;i<response[1].docs.length;i++){
-                if (response[1].docs[i]._id === lastQuote.character){
-                    lastCharacter = response[1].docs[i];
+        //     document.getElementById("submit").style.display = "none";
+        // }
+        const quoteFetch = fetch("https://the-one-api.dev/v2/quote", {headers: {"Authorization" : 'bearer gAAIgrTSktkemLaiBud2'}})
+        .then((response) => {return response.json();})
+        const characterFetch = fetch("https://the-one-api.dev/v2/character", {headers: {"Authorization" : 'bearer gAAIgrTSktkemLaiBud2'}})
+        .then((response) => {return response.json();})
+        const movieFetch = fetch("https://the-one-api.dev/v2/movie", {headers: {"Authorization" : 'bearer gAAIgrTSktkemLaiBud2'}})
+        .then((response) => {return response.json();})
+        const Data = Promise.all([quoteFetch,characterFetch,movieFetch])
+        Data.then((response) => {
+            let inputElements = document.getElementsByTagName("input");
+            let sections = document.getElementsByClassName("SuddenDeath");
+            let article = document.getElementsByClassName("vraag");
+            if(rounds>0){    // indien er een ronde is geweest => controleert het antwoord
+                document.getElementById("submit").style.display = "block";
+                let lastQuote = response[0].docs[lastQuoteIndex];
+                let lastCharacter  = {_id:"",height:"",race:"",gender:"",birth:"",spouse:"",death:"",realm:"",hair:"",name:"",wikiUrl:""};
+                for(let i = 0;i<response[1].docs.length;i++){
+                    if (response[1].docs[i]._id === lastQuote.character){
+                        lastCharacter = response[1].docs[i];
+                    }
                 }
-            }
-            let lastMovie  = {_id:"",name:"",runtimeInMinutes:0,budgetInMillions:0,boxOfficeRevenueInMillions:0,academyAwardNominations:0,academyAwardWins:0,rottenTomatoesScore:0};
+                let lastMovie  = {_id:"",name:"",runtimeInMinutes:0,budgetInMillions:0,boxOfficeRevenueInMillions:0,academyAwardNominations:0,academyAwardWins:0,rottenTomatoesScore:0};
             for(let i  = 0;i<response[2].docs.length;i++){
                 if (response[2].docs[i]._id === lastQuote.movie){
                     lastMovie = response[2].docs[i];
@@ -142,16 +143,16 @@ const SuddenDeath = () => {
                     checkedExists = true;
                     if(i<3 && inputElements[i].value != lastCharacter.name){
                         CorrectAnswer = false;
-                        article[1].remove();
-                        article[0].insertAdjacentHTML("afterbegin",`<article>
+                        article[0].remove();
+                        sections[0].insertAdjacentHTML("afterbegin",`<article>
                         <h2><strong>Gefeliciteerd!</strong><h2>
                         <p>je hebt ${rounds-2} ronde(n) correct voor een score van ${Math.floor(score/2)}</p></article>`);
                         document.getElementById("submit").style.display = "none";
                         mistake = true;
                     }else if(i>=3 && inputElements[i].value != lastMovie.name){
                         CorrectAnswer = false;
-                        article[1].remove();
-                        article[0].insertAdjacentHTML("afterbegin",`<article>
+                        article[0].remove();
+                        sections[0].insertAdjacentHTML("afterbegin",`<article>
                         <h2><strong>Gefeliciteerd!</strong><h2>
                         <p>je hebt ${rounds-2} ronde(n) correct voor een score van ${Math.floor(score/2)}</p></article>`);
                         document.getElementById("submit").style.display = "none";
@@ -166,15 +167,15 @@ const SuddenDeath = () => {
             }  
             if(!checkedExists && rounds > 1){
                 CorrectAnswer = false;
-                article[1].remove();
-                article[0].insertAdjacentHTML("afterbegin",`<article>
+                article[0].remove();
+                sections[0].insertAdjacentHTML("afterbegin",`<article>
                 <h2><strong>Gefeliciteerd!</strong><h2>
                 <p>je hebt ${rounds-2} ronde(n) correct voor een score van ${Math.floor(score/2)}</p></article>`);
                 document.getElementById("submit").style.display = "none";
             }
         }
         if(CorrectAnswer){
-            article[1].remove();
+            article[0].remove();
             let quoteIndex = Math.floor(Math.random() * response[0].docs.length);
             lastQuoteIndex = quoteIndex;
             let quote = response[0].docs[quoteIndex];
@@ -195,7 +196,7 @@ const SuddenDeath = () => {
             let movies = [movie, response[2].docs[Math.floor(Math.random() * response[2].docs.length)], response[2].docs[Math.floor(Math.random() * response[2].docs.length)]];
             // shuffle(movies);
             let h2 = document.getElementsByTagName("h2");
-            article[0].insertAdjacentHTML("afterbegin",`<article><p>${quote.dialog}</p>
+            sections[0].insertAdjacentHTML("afterbegin",`<article class="vraag" ><p>${quote.dialog}</p>
                 <p>Van welk personage komt deze quote?</p>
                 <input type="radio" id="character1" name="character" value="${characters[0].name}">
                 <label for="character1">${characters[0].name}</label><br>
