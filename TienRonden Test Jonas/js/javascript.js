@@ -51,8 +51,8 @@ const TienRonden = () => {
                 }
             }    
         }
-        let article = document.getElementsByTagName("article");
-        article[1].remove(); // verwijdert het article van de vorige vraag om plaats te maken voor de nieuwe
+        let articles = document.getElementsByClassName("");
+        articles[1].remove(); // verwijdert het article van de vorige vraag om plaats te maken voor de nieuwe
         if(rounds<=10){
             let quoteIndex = Math.floor(Math.random() * response[0].docs.length);
             lastQuoteIndex = quoteIndex;
@@ -75,7 +75,8 @@ const TienRonden = () => {
             // shuffle(movies);
             let h2 = document.getElementsByTagName("h2");
             //inserts html voor een nieuwe vraag
-            article[0].insertAdjacentHTML("afterbegin",`<article><p>${quote.dialog}</p>
+            let sections = document.getElementsByClassName("");
+            sections[0].insertAdjacentHTML("afterbegin",`<article><p>${quote.dialog}</p>
                 <p>Van welk personage komt deze quote?</p>
                 <input type="radio" id="character1" name="character" value="${characters[0].name}">
                 <label for="character1">${characters[0].name}</label><br>
@@ -96,7 +97,7 @@ const TienRonden = () => {
             let button = document.getElementById("submit");
             button.textContent = "Finish"
         }if (rounds > 10){// toont totaalscore na de laatste vraag
-            article[0].insertAdjacentHTML("afterbegin",`<article>
+            articles[0].insertAdjacentHTML("afterbegin",`<article>
             <h2><strong>Gefeliciteerd!</strong><h2>
             <p>je hebt een score van ${score}</p></article>`);
         }

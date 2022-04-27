@@ -1,4 +1,4 @@
-function shuffle(array ){
+function shuffle(array ){//gooit de antwoorden door elkaar
     let currentIndex  = array.length;
     let randomIndex ;
     while (currentIndex != 0){
@@ -13,7 +13,7 @@ function shuffle(array ){
 
 let score = 0;
 let rounds = 0;
-let lastQuoteIndex = 0;
+let lastQuoteIndex = 0;//index van de vorige quote (voor oplossingen te checken)
 let CorrectAnswer = true;
 if(rounds === 0){
     document.getElementById("submit").style.display = "none";
