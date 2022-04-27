@@ -77,21 +77,42 @@ const TienRonden = () => {
             let h2 = document.getElementsByTagName("h2");
             //inserts html voor een nieuwe vraag
             let sections = document.getElementsByClassName("TienRonden");
-            sections[0].insertAdjacentHTML("afterbegin",`<article class="vraag" ><p>${quote.dialog}</p>
+            sections[0].insertAdjacentHTML("afterbegin",`<article class="vraag" ><p><strong>quote:</strong> ${quote.dialog}</p> <br/>
                 <p>Van welk personage komt deze quote?</p>
+
+                <section class="test">   
                 <input type="radio" id="character1" name="character" value="${characters[0].name}">
-                <label for="character1">${characters[0].name}</label><br>
+                <label for="character1">${characters[0].name}</label>
+                </section>
+
+                <section class="test">
                 <input type="radio" id="character2" name="character" value="${characters[1].name}">
-                <label for="character2">${characters[1].name}</label><br>
+                <label for="character2">${characters[1].name}</label>
+                </section>
+
+                <section class="test">
                 <input type="radio" id="character3" name="character" value="${characters[2].name}">
                 <label for="character3">${characters[2].name}</label>
-                <p>Uit welke film komt deze quote?</p>
-                <input type="radio" id="character1" name="movie" value="${movies[0].name}">
-                <label for="character1">${movies[0].name}</label><br>
-                <input type="radio" id="character2" name="movie" value="${movies[1].name}">
-                <label for="character2">${movies[1].name}</label><br>
-                <input type="radio" id="character3" name="movie" value="${movies[2].name}">
-                <label for="character3">${movies[2].name}</label></article>`);
+                </section> <br/>
+
+                <p>Uit welke film komt deze quote?</p> 
+
+                <section class="test">
+                <input type="radio" id="movies1" name="movie" value="${movies[0].name}">
+                <label for="movies1">${movies[0].name}</label>
+                </section>
+
+                <section class="test">
+                <input type="radio" id="movies2" name="movie" value="${movies[1].name}">
+                <label for="movies2">${movies[1].name}</label>
+                </section> 
+
+                <section class="test">
+                <input type="radio" id="movies3" name="movie" value="${movies[2].name}">
+                <label for="movies3">${movies[2].name}</label>
+                </section>
+
+                </article>`);
             console.log(score);
             console.log(rounds);
         }if (rounds === 10){//verander "submit" knop naar "finish" knop bij de laatste vraag
@@ -196,21 +217,41 @@ const SuddenDeath = () => {
             let movies = [movie, response[2].docs[Math.floor(Math.random() * response[2].docs.length)], response[2].docs[Math.floor(Math.random() * response[2].docs.length)]];
             // shuffle(movies);
             let h2 = document.getElementsByTagName("h2");
-            sections[0].insertAdjacentHTML("afterbegin",`<article class="vraag" ><p>${quote.dialog}</p>
+            sections[0].insertAdjacentHTML("afterbegin",`<article class="vraag" ><p><strong>quote:</strong> ${quote.dialog}</p> <br/>
                 <p>Van welk personage komt deze quote?</p>
+                
+                <section class="test">   
                 <input type="radio" id="character1" name="character" value="${characters[0].name}">
-                <label for="character1">${characters[0].name}</label><br>
+                <label for="character1">${characters[0].name}</label>
+                </section>
+
+                <section class="test">
                 <input type="radio" id="character2" name="character" value="${characters[1].name}">
-                <label for="character2">${characters[1].name}</label><br>
+                <label for="character2">${characters[1].name}</label>
+                </section>
+
+                <section class="test">
                 <input type="radio" id="character3" name="character" value="${characters[2].name}">
                 <label for="character3">${characters[2].name}</label>
-                <p>Uit welke film komt deze quote?</p>
-                <input type="radio" id="character1" name="movie" value="${movies[0].name}">
-                <label for="character1">${movies[0].name}</label><br>
-                <input type="radio" id="character2" name="movie" value="${movies[1].name}">
-                <label for="character2">${movies[1].name}</label><br>
-                <input type="radio" id="character3" name="movie" value="${movies[2].name}">
-                <label for="character3">${movies[2].name}</label></article>`);
+                </section> <br/>
+
+                <p>Uit welke film komt deze quote?</p> 
+
+                <section class="test">
+                <input type="radio" id="movies1" name="movie" value="${movies[0].name}">
+                <label for="movies1">${movies[0].name}</label>
+                </section>
+
+                <section class="test">
+                <input type="radio" id="movies2" name="movie" value="${movies[1].name}">
+                <label for="movies2">${movies[1].name}</label>
+                </section> 
+
+                <section class="test">
+                <input type="radio" id="movies3" name="movie" value="${movies[2].name}">
+                <label for="movies3">${movies[2].name}</label>
+                </section>
+</article>`);
             console.log(score);
             console.log(rounds);    
         }

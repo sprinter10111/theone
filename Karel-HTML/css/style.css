@@ -1,10 +1,11 @@
+@font-face {
+  src: url(/fonts/RINGM___.TTF);
+  font-family: Lord;
+}
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-@font-face {
-  src: url(/fonts/RINGM___.TTF);
   font-family: Lord;
 }
 body {
@@ -30,26 +31,26 @@ header {
   grid-area: header;
   float: left;
   width: 100%;
-  height: 200px;
+  height: auto;
   background-color: black;
 }
-.text {
-  float: left;
-  padding-left: 10rem;
-  text-align: center;
-}
+
 .text h2 {
+  float: left;
   color: rgb(124, 124, 12);
 
-  padding: 1.5rem 0rem 1rem 1rem;
-  font-size: 8rem;
+  padding: 1.5rem 0rem 1rem 1vw;
+  font-size: 7vw;
   font-family: Lord;
   text-align: center;
 }
 /*hearder dropdown*/
 .dropbtn {
-  color: white;
-  padding: 16px;
+  border-radius: 70%;
+  border: none;
+  color: rgb(124, 124, 12);
+  background-color: rgba(0, 0, 0, 0.6); 
+  padding: 0px;
   font-size: 16px;
   border: none;
   cursor: pointer;
@@ -57,7 +58,8 @@ header {
 
 .dropbtn:hover,
 .dropbtn:focus {
-  box-shadow: rgb(160, 160, 46);
+  box-shadow: 5px 5px 50px 29px rgb(241, 209, 26);
+  background-color: rgba(241, 209, 26, 0.8);
 }
 
 .dropdown {
@@ -73,20 +75,23 @@ header {
   background-color: #f1f1f1;
   min-width: 160px;
   overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  
+  background-color: rgba(49, 43, 43, 0.8); 
+  box-shadow: 0px 0px 25px 0px rgb(241, 209, 26);
   right: 0;
   z-index: 1;
 }
 
 .dropdown-content a {
-  color: black;
+  color: rgb(124, 124, 12);
+  font-weight: 700;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
 
 .dropdown a:hover {
-  background-color: #ddd;
+  background-color: rgba(49, 43, 43, 0.9); 
 }
 .show {
   display: block;
@@ -95,9 +100,27 @@ header {
 main {
   grid-area: main;
   width: 80%;
+
   margin-top: 3%;
   margin-bottom: 3%;
   margin: 0 auto;
+}
+/*submenu */
+.submenu{
+  padding: 0.5rem;
+  text-align: center;
+}
+.submenu a {
+  font-size: 4rem;
+  padding: 0rem 1rem 0.5rem 1rem;
+  font-family: Lord;
+  text-decoration:none;
+  color: black;
+}
+.submenu a:hover {
+  border-radius: 2rem;
+  background-color: black;
+  color:rgb(241, 209, 26) ;
 }
 main h2 {
   font-size: 3rem;
@@ -110,20 +133,24 @@ main h2 {
   justify-content: space-between;
   flex-wrap: wrap;
 }
+/*algemeene footer*/
 footer {
   grid-area: footer;
   font-family: Lord;
   width: 100%;
-  height: 15rem;
+  position:initial;
+  bottom: 0;
+  height: auto;
   color: rgb(131, 133, 42);
   background-color: rgb(47, 47, 58);
+  padding: 2rem;
 }
 /*het efect van de img*/
-
 .item {
-  width: 40rem;
+  max-width: 35rem;
+  min-width: 20rem;
   margin: 1%;
-  float: left;
+
   overflow: hidden;
   position: relative;
 }
@@ -133,12 +160,11 @@ footer {
   transition: all 0.5s ease;
   border-radius: 5rem;
 }
-
 /* effect 6 */
 .text6 {
   font-family: Lord;
+  font-size: 1.5rem;
   color: rgb(131, 131, 18);
-  text-align: left;
   position: absolute;
   width: 100%;
   bottom: 0;
@@ -151,9 +177,16 @@ footer {
   position: absolute;
   bottom: 0;
   opacity: 1;
-  background: rgba(209, 89, 89, 0.6);
+  background: rgba(49, 43, 43, 0.6);
   border-bottom-left-radius: 5rem;
   border-bottom-right-radius: 5rem;
+}
+.titel{
+  padding: 1rem 1rem 1rem 0rem;
+}
+.start{
+  color: rgb(131, 131, 18);
+  padding: 1rem 1rem 1rem 0rem;
 }
 /*alles over quiz 1*/
 .quiz1 {
@@ -162,5 +195,24 @@ footer {
   margin: 3%;
   padding: 2rem 2rem 2rem 2rem;
   background-color: brown;
+  border-radius: 5rem;
+}
+
+.TienRonden, .SuddenDeath{
+  background-color: rgba(146, 134, 39, 0.8);
+  padding: 40px 20px 30px 40px;
+  border-radius: 5rem;
+}
+.vraag{
+  font-size: 1.5rem;
+}
+.test {
+  width: 70vw;
+  border: 5rem;
+  margin: 10px;
+}
+.test:hover{
+  width: 20rem;
+  background-color: rgb(189, 173, 48);
   border-radius: 5rem;
 }
