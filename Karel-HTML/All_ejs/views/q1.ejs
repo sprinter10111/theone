@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="nl-BE">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="http://localhost:3000/css/style.css" />
+    <script src="http://localhost:3000/js/script.js" defer></script>
+    <script src="http://localhost:3000/js/Quiz.js" defer></script>
+  </head>
+  <body class="grid-container">
+    <header>
+      <section class="text">
+        <h2>The Lord of The Rings</h2>
+      </section>
+      <div class="dropdown">
+        <img
+          onclick="myFunction()"
+          class="dropbtn"
+          src="http://localhost:3000/assets/pngegg (5).png"
+          alt=""
+        />
+        <div id="myDropdown" class="dropdown-content">
+          <a href="http://localhost:3000">Home</a>
+          <a href="http://localhost:3000/LOTR">THE ONE</a>
+          <a href="#">Fifa</a>
+          <a href="#">Fortnite</a>
+          <a href="#">LegoMasters</a>
+          <a href="#">Magic The Gathering</a>
+          <a href="#">Nationale Bank (NBB)</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+    </header>
+    <main>
+      <h2>10 rounds</h2>
+      <section class="TienRonden">
+        <article class="vraag"></article>
+      </section>
+      <button id="submit" onclick="TienRonden()">submit</button>
+    </main>
+  </body>
+</html>
