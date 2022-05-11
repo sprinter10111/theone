@@ -1,11 +1,5 @@
 const express = require('express');
 const app = express();
-//const ejs= require('ejs');
-
-
-
-//app.set('view engine', 'ejs');
-//app.set('port', 3000);
 
 app.get('/',(req,res)=>{
     var fs = require('fs');
