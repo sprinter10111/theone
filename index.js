@@ -6,7 +6,6 @@ app.set("port", 3000);
 app.set("view engine", "ejs");
 
 app.get('/',(req,res)=>{
-    res.render("iets");
     
 });
 /*app.set('port',(process.env.PORT||5000));
