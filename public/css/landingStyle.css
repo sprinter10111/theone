@@ -86,7 +86,8 @@
 }
 
 body {
-  margin: 0;
+
+  width: 0%;
   font-family: var(--bs-body-font-family);
   font-size: var(--bs-body-font-size);
   font-weight: var(--bs-body-font-weight);
@@ -97,7 +98,7 @@ body {
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-#home_col,#about_col{
+#home_col{
   color: white;
   background-color: rgba(10, 3, 3, 0.6);
   border-radius: 9px;
@@ -115,40 +116,19 @@ body {
   height: 100%;
   text-decoration: none;
   color:white;
+  width: 80%;
+  padding-right: 0%;
+  margin-right: 0%;
 }
 .col:hover { transform: scale(1.1); }
-#about{
-  height: 100%;
-  background-color: blue;
-  background-image: url("../assets/img/logo-artesis-plantijn.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100%;
+
+
+img{
+  width: 100%;
 }
 
-#contact{
-  margin: 5%;
-  padding: 2%;
-  margin-top: 0%;
-  padding-top: 4%;
-  margin-bottom: 1%;
-  padding-bottom: 10%;
-}
-#form{
-  background-color: #B3000A;
-  color: white;
-  padding: 10px;
-  border-radius: 15px;
-}
-textarea,#email{
-  border-radius: 14px;
-}
-#services{
-  height: 100%;
-}
 #nbb_col{
   background-color: #214685;
-  margin-left: 5%;
 }
 #magic_col{
   background-color: #BE3A14;
@@ -161,13 +141,21 @@ textarea,#email{
 }
 #lego_col{
   background-color: #F82216;
-  margin-right: 5%;
+}
+#fortnitr_col{
+  background-color: #0278E6;
 }
 #titel{
   text-align: center;
 }
-
-
+a{
+  text-decoration-line: none;
+}
+.col_tekst{
+  margin: 5px;
+  text-align: center;
+  padding-top: 10%
+}
 h6,
 .h6,
 h5,
@@ -503,7 +491,6 @@ progress {
   --bs-gutter-x: 1.5rem;
   --bs-gutter-y: 0;
   display: flex;
-  flex-wrap: wrap;
   margin-top: calc(-1 * var(--bs-gutter-y));
   margin-right: calc(-0.5 * var(--bs-gutter-x));
   margin-left: calc(-0.5 * var(--bs-gutter-x));
@@ -516,7 +503,9 @@ progress {
   padding-left: calc(var(--bs-gutter-x) * 0.5);
   margin-top: var(--bs-gutter-y);
 }
-
+#projecten{
+  width: 100%;
+}
 .col {
   flex: 1 0 0%;
 }
@@ -11448,7 +11437,7 @@ fieldset:disabled .btn {
 }
 body,
 html {
-  width: 100%;
+  width: 99%;
   height: 100%;
 }
 
@@ -11651,7 +11640,7 @@ footer.footer .social-link:hover {
       rgba(255, 255, 255, 0.1) 0%,
       rgba(255, 255, 255, 0.1) 100%
     ),
-    url("../assets/img/bg.jpg");
+    url("../assets/img/bgv4.jpg");
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
