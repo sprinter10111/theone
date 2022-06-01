@@ -49,7 +49,7 @@ let doSomeDBCalls = async () => {
         reden: req.params.reden,
       };
       blacklist.push(blacklistItem);
-      await client.db("TheOne").collection("Blacklist").insertOne(blacklist);
+      await client.db("TheOne").collection("Blacklist").insertOne(blacklistItem);
       res.render("blacklist", { blacklist: blacklist });
       await client.close();
     });
