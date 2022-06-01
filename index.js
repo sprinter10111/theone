@@ -40,7 +40,9 @@ let doSomeDBCalls = async () => {
     app.get("/blacklist", (req, res) => {
       res.render("blacklist", { blacklist: blacklist });
     });
-
+    app.get("/error", (req, res) => {
+      res.render("error");
+    });
     app.post("/addedBlacklistitem/:keuze:reden", async (req, res) => {
       await client.connect();
       let blacklistItem = {
@@ -104,12 +106,12 @@ let doSomeDBCalls = async () => {
       await client.close();
     });
 
-    /*app.listen(app.get("port"), () =>
+    app.listen(app.get("port"), () =>
       console.log("[server] http://localhost:" + app.get("port"))
-    );*/
+    );
 
-    app.set('port', (process.env.PORT || 5000));
-    app.listen(app.get('port'), function() { });
+    //app.set('port', (process.env.PORT || 5000));
+    //app.listen(app.get('port'), function() { });
 
 
     // Make the appropriate DB calls

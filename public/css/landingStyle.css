@@ -87,7 +87,6 @@
 
 body {
 
-  width: 0%;
   font-family: var(--bs-body-font-family);
   font-size: var(--bs-body-font-size);
   font-weight: var(--bs-body-font-weight);
@@ -105,7 +104,7 @@ body {
   margin-left: 10%;
   margin-right: 10%;
   padding-bottom: 1%;
-
+  text-align: center;
 }
 .content-section bg-primary text-white text-center{
   width: 100%;
@@ -116,7 +115,7 @@ body {
   height: 100%;
   text-decoration: none;
   color:white;
-  width: 80%;
+  width: 100%;
   padding-right: 0%;
   margin-right: 0%;
 }
@@ -142,7 +141,7 @@ img{
 #lego_col{
   background-color: #F82216;
 }
-#fortnitr_col{
+#fortnite_col{
   background-color: #0278E6;
 }
 #titel{
@@ -505,6 +504,8 @@ progress {
 }
 #projecten{
   width: 100%;
+  padding: 0%;
+  margin: 0%;
 }
 .col {
   flex: 1 0 0%;
@@ -11435,12 +11436,22 @@ fieldset:disabled .btn {
     display: none !important;
   }
 }
-body,
-html {
-  width: 99%;
-  height: 100%;
-}
 
+html {
+  width: 80%;
+  padding-left: 5%;
+}
+#home_col{
+  width: 100%;
+}
+header {
+  width: 100%;
+  text-align: center;
+}
+body{
+  width: 100%;
+
+}
 .content-section {
   padding-top: 7.5rem;
   padding-bottom: 7.5rem;
@@ -11632,7 +11643,6 @@ footer.footer .social-link:hover {
   position: relative;
   display: table;
   width: 100%;
-  height: 100%;
   padding-top: 8rem;
   padding-bottom: 8rem;
   background: linear-gradient(
@@ -11640,7 +11650,7 @@ footer.footer .social-link:hover {
       rgba(255, 255, 255, 0.1) 0%,
       rgba(255, 255, 255, 0.1) 100%
     ),
-    url("../assets/img/bgv4.jpg");
+    url("../assets/img/final_bg.jpeg");
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
