@@ -104,12 +104,13 @@ let doSomeDBCalls = async () => {
       await client.close();
     });
 
-    /*app.listen(app.get("port"), () =>
+    app.listen(app.get("port"), () =>
       console.log("[server] http://localhost:" + app.get("port"))
-    );*/
-
+    );
+    /*
     app.set('port', (process.env.PORT || 5000));
     app.listen(app.get('port'), function() { });
+    */
 
 
     // Make the appropriate DB calls
