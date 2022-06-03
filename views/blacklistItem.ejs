@@ -21,7 +21,7 @@
           alt=""
         />
         <div id="myDropdown" class="dropdown-content">
-          <a href="/">Home</a>
+          <a href="index.html">Home</a>
           <a href="quiz.html">THE ONE</a>
           <a href="#">Fifa</a>
           <a href="#">Fortnite</a>
@@ -32,30 +32,13 @@
         </div>
       </div>
     </header>
-    <nav class="submenu">
-      <ul>
-        <li><a href="/LOTR">quiz</a></li>
-        <li><a href="/blacklist">blacklist</a></li>
-        <li><a href="/favorites">favorite</a></li>
-      </ul>
-    </nav>
     <main>
-      <article class="favorites">
-        <table class="favorites-table">
-          <tr>
-            <th>Quote</th>
-            <th>Character</th>
-            <th>Verwijder</th>
-          </tr>
-          <% for(let i = 0;i<favorites.length;i++){ %>
-            <%- '<tr>' %>
-              <%- '<td>' + favorites[i].quote + '</td>' %>
-              <%- '<td>' + favorites[i].character + '</td>' %>
-              <%- '<td><a href="/removefavorite/' + i + '"><input type="submit" value="Verwijder"/></a></td>' %>
-            <% '</tr>' %>
-          <% } %>
-        </table>
-        <button>Print favorites</button>
+      <article class="blacklist">
+        <form action="/updateblacklistitem/<%=keuze%>" method="post">
+            <p><%= blacklist[keuze].quote %></p>
+            <textarea id="blacklistReden" name="blacklistReden" rows="4" cols="50" placeholder="Geef een reden voor de blacklist" required><%= blacklist[keuze].reden %></textarea>
+            <br/><button type="submit">Submit</button>  
+        </form>
       </article>
     </main>
     <footer>
