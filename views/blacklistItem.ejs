@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="nl-BE">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/script.js" defer></script>
+  </head>
+  <body class="grid-container">
+    <header>
+      <section class="text">
+        <h2>The Lord of The Rings</h2>
+      </section>
+      <div class="dropdown">
+        <img
+          onclick="myFunction()"
+          class="dropbtn"
+          src="assets/pngegg (5).png"
+          alt=""
+        />
+        <div id="myDropdown" class="dropdown-content">
+          <a href="index.html">Home</a>
+          <a href="quiz.html">THE ONE</a>
+          <a href="#">Fifa</a>
+          <a href="#">Fortnite</a>
+          <a href="#">LegoMasters</a>
+          <a href="#">Magic The Gathering</a>
+          <a href="#">Nationale Bank (NBB)</a>
+          <a href="#">Contact</a>
+        </div>
+      </div>
+    </header>
+    <main>
+      <article class="blacklist">
+        <form action="/updateblacklistitem/<%=keuze%>" method="post">
+            <p><%= blacklist[keuze].quote %></p>
+            <textarea id="blacklistReden" name="blacklistReden" rows="4" cols="50" placeholder="Geef een reden voor de blacklist" required><%= blacklist[keuze].reden %></textarea>
+            <br/><button type="submit">Submit</button>  
+        </form>
+      </article>
+    </main>
+    <footer>
+      <p>
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla ipsam
+        nisi quam accusamus provident cum, perferendis eius praesentium maiores
+        expedita! Nihil, in commodi quasi cupiditate ipsa voluptatibus excepturi
+        culpa sequi minus illo eligendi ullam numquam dolorum, doloribus
+        necessitatibus optio quas vitae dolor atque eaque. Aliquam nam,
+        reprehenderit veritatis facere, a cumque neque officia molestias rem
+        laborum quia quod delectus velit corrupti sapiente quae quas minima quos
+        magnam totam illo quam adipisci. Ex hic fuga cum. Amet adipisci suscipit
+        fuga dignissimos velit dicta cum a cumque accusantium? Quidem cum
+        reiciendis itaque animi? Doloribus excepturi sequi magni labore deleniti
+        ducimus esse molestias.
+      </p>
+    </footer>
+  </body>
+</html>
