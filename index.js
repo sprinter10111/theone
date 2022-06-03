@@ -113,7 +113,7 @@ let doSomeDBCalls = async () => {
         if(req.body.addToDB === "blacklist"){
           res.redirect(`/addedBlacklistitem?quote=${lastQuote.dialog}&blacklistReden=${req.body.blacklistReden}&quizType=tienRonden`);
         }else if(req.body.addToDB === "favorite"){
-          res.redirect(`/addedBlacklistitem?quote=${lastQuote.dialog}&lastCharacter=${lastCharacter}&quizType=tienRonden`);
+          res.redirect(`/addedfavorite?quote=${lastQuote.dialog}&lastCharacter=${lastCharacter.name}&quizType=tienRonden`);
         }else if(req.body.addToDB === undefined || req.body.addToDB === "none"){
           res.redirect("/LOTR/1");
         }    
@@ -187,7 +187,7 @@ let doSomeDBCalls = async () => {
       if(req.body.addToDB === "blacklist"){
         res.redirect(`/addedBlacklistitem?quote=${lastQuote.dialog}&blacklistReden=${req.body.blacklistReden}&quizType=suddenDeath`);
       }else if(req.body.addToDB === "favorite"){
-        res.redirect(`/addedBlacklistitem?quote=${lastQuote.dialog}&lastCharacter=${lastCharacter}&quizType=suddenDeath`);
+        res.redirect(`/addedfavorite?quote=${lastQuote.dialog}&lastCharacter=${lastCharacter.name}&quizType=suddenDeath`);
       }else if(req.body.addToDB === undefined || req.body.addToDB === "none"){
         res.redirect("/LOTR/2");
       }    
@@ -198,6 +198,18 @@ let doSomeDBCalls = async () => {
 
     app.get("/blacklist", (req, res) => {
       res.render("blacklist", { blacklist: blacklist });
+    });
+
+    app.get("/blacklistitem/:keuze", (req, res) => {
+      res.render("blacklistItem", {keuze: req.params.keuze, blacklist: blacklist});
+    });
+
+    app.post("/updateblacklistitem/:keuze", async (req, res) => {
+      await client.connect();
+      blacklist[req.params.keuze].reden = req.body.blacklistReden;
+      await client.db("TheOne").collection("Blacklist").updateOne({_id: blacklist[req.params.keuze]._id}, {$set:{reden: req.body.blacklistReden}});
+      res.redirect("/blacklist");
+      await client.close();
     });
 
     app.get("/addedBlacklistitem", async (req, res) => {
@@ -236,13 +248,13 @@ let doSomeDBCalls = async () => {
     });
 
     let favoritesCursor = client.db("TheOne").collection("Favorites").find({});
-    let favorites= await favoritesCursor.toArray();
+    let favorites = await favoritesCursor.toArray();
 
     app.get("/favorites", (req, res) => {
       res.render("favorites", { favorites: favorites });
     });
 
-    app.post("/addedfavorite", async (req, res) => {
+    app.get("/addedfavorite", async (req, res) => {
       await client.connect();
       let favorite= {
         _id: ObjectId(),
