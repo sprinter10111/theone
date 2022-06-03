@@ -45,10 +45,12 @@
               <%- '<td>' + favorites[i].quote + '</td>' %>
               <%- '<td>' + favorites[i].character + '</td>' %>
               <%- '<td><a href="/removefavorite/' + i + '"><input type="submit" value="Verwijder"/></a></td>' %>
-            <% '</tr>' %>
+            <%- '</tr>' %>
           <% } %>
         </table>
-        <button>Print favorites</button>
+        <form action="printFavorites" method="post">
+        <button type="submit">Print favorites</button>
+        </form>
       </article>
     </main>
     <footer>

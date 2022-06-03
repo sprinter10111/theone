@@ -2,12 +2,14 @@ const express = require("express");
 const app = express();
 const ejs = require("ejs"); // EJS import
 const axios = require('axios');
+const fs = require('fs');
 
 const uri =
   "mongodb+srv://YJSK:LOTRYJSK@theone.4lvoc.mongodb.net/TheOne?retryWrites=true&w=majority";
 const { MongoClient, ObjectId } = require("mongodb");
 const req = require("express/lib/request");
 const res = require("express/lib/response");
+const { type } = require("express/lib/response");
 //const uri = "mongodb+srv://<username>:<password>@<your-cluster-url>/test?retryWrites=true&w=majority
 const client = new MongoClient(uri, { useUnifiedTopology: true });
 
@@ -72,7 +74,7 @@ let doSomeDBCalls = async () => {
             }
         }
         characters = [character, allCharacters.docs[Math.floor(Math.random() * allCharacters.docs.length)], allCharacters.docs[Math.floor(Math.random() * allCharacters.docs.length)]];//array met het correcte antwoord en 2 random characters
-        shuffle(characters);
+        // shuffle(characters);
         let movie  = {_id:"",name:"",runtimeInMinutes:0,budgetInMillions:0,boxOfficeRevenueInMillions:0,academyAwardNominations:0,academyAwardWins:0,rottenTomatoesScore:0};
         for(let i  = 0;i<allMovies.docs.length;i++){// zoekt de film die bij de quote hoort
             if (allMovies.docs[i]._id === quote.movie){
@@ -80,7 +82,7 @@ let doSomeDBCalls = async () => {
             }
         }
         movies = [movie, allMovies.docs[Math.floor(Math.random() * allMovies.docs.length)], allMovies.docs[Math.floor(Math.random() * allMovies.docs.length)]];//array met het correcte antwoord en 2 random filmen
-        shuffle(movies);
+        // shuffle(movies);
         }
         res.render("q1", {quote: quote, characters: characters, movies: movies, score: score, unfinished: true});
       }if (rounds >= 10){
@@ -141,7 +143,7 @@ let doSomeDBCalls = async () => {
             }
         }
         characters = [character, allCharacters.docs[Math.floor(Math.random() * allCharacters.docs.length)], allCharacters.docs[Math.floor(Math.random() * allCharacters.docs.length)]];//array met het correcte antwoord en 2 random characters
-        shuffle(characters);
+        // shuffle(characters);
         let movie  = {_id:"",name:"",runtimeInMinutes:0,budgetInMillions:0,boxOfficeRevenueInMillions:0,academyAwardNominations:0,academyAwardWins:0,rottenTomatoesScore:0};
         for(let i  = 0;i<allMovies.docs.length;i++){// zoekt de film die bij de quote hoort
             if (allMovies.docs[i]._id === quote.movie){
@@ -149,7 +151,7 @@ let doSomeDBCalls = async () => {
             }
         }
         movies = [movie, allMovies.docs[Math.floor(Math.random() * allMovies.docs.length)], allMovies.docs[Math.floor(Math.random() * allMovies.docs.length)]];//array met het correcte antwoord en 2 random filmen
-        shuffle(movies);
+        // shuffle(movies);
         }
         res.render("q2", {quote: quote, characters: characters, movies: movies, score: score, unfinished: SuddenDeathCorrectAnswer});
       }else{
@@ -211,7 +213,6 @@ let doSomeDBCalls = async () => {
       res.redirect("/blacklist");
       await client.close();
     });
-
     app.get("/addedBlacklistitem", async (req, res) => {
       await client.connect();
       
@@ -252,6 +253,15 @@ let doSomeDBCalls = async () => {
 
     app.get("/favorites", (req, res) => {
       res.render("favorites", { favorites: favorites });
+      let printContent = "";
+      for(let i = 0;i<favorites.length;i++){
+        printContent += `${favorites[i].quote}\t${favorites[i].character}\n`;
+      }
+      fs.writeFile('./public/favorites.txt', printContent, err => {
+        if(err){
+          console.log(err);
+        }
+      })
     });
 
     app.get("/addedfavorite", async (req, res) => {
@@ -263,6 +273,15 @@ let doSomeDBCalls = async () => {
       };
       favorites.push(favorite);
       await client.db("TheOne").collection("Favorites").insertOne(favorite);
+      let printContent;
+      for(let i = 0;i<favorites.length;i++){
+        printContent += `${favorites[i].quote}\t${favorites[i].character}\n`;
+      }
+      fs.writeFile('./public/favorites.txt', printContent, err => {
+        if(err){
+          console.log(err);
+        }
+      })
       if(req.query.quizType === "tienRonden"){
         res.redirect("/LOTR/1");  
       }else{
@@ -282,8 +301,21 @@ let doSomeDBCalls = async () => {
         .collection("Favorites")
         .find({});
       favorites = await favoritesCursor.toArray();
+      let printContent;
+      for(let i = 0;i<favorites.length;i++){
+        printContent += `${favorites[i].quote}\t${favorites[i].character}\n`;
+      }
+      fs.writeFile('./public/favorites.txt', printContent, err => {
+        if(err){
+          console.log(err);
+        }
+      })
       res.redirect("/favorites");
       await client.close();
+    });
+
+    app.post("/printFavorites", (req, res) => {
+      res.download('./public/favorites.txt');
     });
 
     app.listen(app.get("port"), () =>
