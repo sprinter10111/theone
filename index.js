@@ -44,6 +44,9 @@ let doSomeDBCalls = async () => {
     app.get("/", (req, res) => {
       res.render("index");
     });
+    app.get("/error", (req, res) => {
+      res.render("error");
+    });
     app.get("/LOTR", (req, res) => {
       res.render("quiz");
     });
@@ -289,16 +292,10 @@ let doSomeDBCalls = async () => {
     app.listen(app.get("port"), () =>
       console.log("[server] http://localhost:" + app.get("port"))
     );
-<<<<<<< HEAD
     /*
     app.set('port', (process.env.PORT || 5000));
     app.listen(app.get('port'), function() { });
     */
-=======
-
-    // app.set('port', (process.env.PORT || 5000));
-    // app.listen(app.get('port'), function() { });
->>>>>>> 4600903b6dbd97ac26d8c4ad5157afa4caef3780
 
 
     // Make the appropriate DB calls
