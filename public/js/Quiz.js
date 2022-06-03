@@ -15,6 +15,8 @@ let score = 0;
 let rounds = 0;
 let lastQuoteIndex = 0;//index van de vorige quote (voor oplossingen te checken)
 let CorrectAnswer = true;
+let blacklistItems = [];
+let favorites = [];
 if(rounds === 0){ // verandert tekst van de submit knop (enkel voor de start van de quiz)
     document.getElementById("submit").textContent = "start"
 }
@@ -30,7 +32,7 @@ const TienRonden = () => {
     const Data = Promise.all([quoteFetch,characterFetch,movieFetch])
     Data.then((response) => {
         let inputElements = document.getElementsByTagName("input");
-        if(rounds>0){   // controleert antwoorden en verhoogt score indien nodig 
+        if(rounds>1){   // controleert antwoorden en verhoogt score indien nodig 
             let lastQuote = response[0].docs[lastQuoteIndex];
             let lastCharacter  = {_id:"",height:"",race:"",gender:"",birth:"",spouse:"",death:"",realm:"",hair:"",name:"",wikiUrl:""};
             for(let i = 0;i<response[1].docs.length;i++){
@@ -50,7 +52,12 @@ const TienRonden = () => {
                         score++;
                     }
                 }
-            }    
+            }
+            if(inputElements[inputElements.length-1].checked){
+                blacklistItems.push([lastQuote.dialog, document.getElementsByTagName("textarea")[0].value]);
+            }else if(inputElements[inputElements.length-2].checked){
+                favorites.push([lastQuote.dialog, lastCharacter.name]);
+            }
         }
         let articles = document.getElementsByClassName("vraag");
         articles[0].remove(); // verwijdert het article van de vorige vraag om plaats te maken voor de nieuwe
@@ -65,7 +72,7 @@ const TienRonden = () => {
                 }
             }
             let characters = [character, response[1].docs[Math.floor(Math.random() * response[1].docs.length)], response[1].docs[Math.floor(Math.random() * response[1].docs.length)]];//array met correcte antwoorden en 2 random characters
-            // shuffle(characters);
+            shuffle(characters);
             let movie  = {_id:"",name:"",runtimeInMinutes:0,budgetInMillions:0,boxOfficeRevenueInMillions:0,academyAwardNominations:0,academyAwardWins:0,rottenTomatoesScore:0};
             for(let i  = 0;i<response[2].docs.length;i++){// zoekt de film die bij de quote hoort
                 if (response[2].docs[i]._id === quote.movie){
@@ -73,48 +80,48 @@ const TienRonden = () => {
                 }
             }
             let movies = [movie, response[2].docs[Math.floor(Math.random() * response[2].docs.length)], response[2].docs[Math.floor(Math.random() * response[2].docs.length)]];//array met correcte antwoorden en 2 random filmen
-            // shuffle(movies);
+            shuffle(movies);
             let h2 = document.getElementsByTagName("h2");
             //inserts html voor een nieuwe vraag
             let sections = document.getElementsByClassName("TienRonden");
             sections[0].insertAdjacentHTML("afterbegin",`<article class="vraag" ><p><strong>quote:</strong> ${quote.dialog}</p> <br/>
                 <p>Van welk personage komt deze quote?</p>
-
                 <section class="test">   
                 <input type="radio" id="character1" name="character" value="${characters[0].name}">
                 <label for="character1">${characters[0].name}</label>
                 </section>
-
                 <section class="test">
                 <input type="radio" id="character2" name="character" value="${characters[1].name}">
                 <label for="character2">${characters[1].name}</label>
                 </section>
-
                 <section class="test">
                 <input type="radio" id="character3" name="character" value="${characters[2].name}">
                 <label for="character3">${characters[2].name}</label>
                 </section> <br/>
-
                 <p>Uit welke film komt deze quote?</p> 
-
                 <section class="test">
                 <input type="radio" id="movies1" name="movie" value="${movies[0].name}">
                 <label for="movies1">${movies[0].name}</label>
                 </section>
-
                 <section class="test">
                 <input type="radio" id="movies2" name="movie" value="${movies[1].name}">
                 <label for="movies2">${movies[1].name}</label>
                 </section> 
-
                 <section class="test">
                 <input type="radio" id="movies3" name="movie" value="${movies[2].name}">
                 <label for="movies3">${movies[2].name}</label>
                 </section>
-
+                <p>Extra opties</p> 
+                <section class="test">
+                <input type="radio" id="favorite" name="addToDB"">
+                <label for="favorite">toevoegen aan favorieten</label>
+                </section>
+                <section class="test">
+                <input type="radio" id="blacklist" name="addToDB"">
+                <label for="blacklist">toevoegen aan blacklist</label>
+                </section>
+                <textarea id="blacklistReden" name="blacklistReden" rows="4" cols="50" placeholder="Geef een reden voor de blacklist"></textarea>
                 </article>`);
-            console.log(score);
-            console.log(rounds);
         }if (rounds === 10){//verander "submit" knop naar "finish" knop bij de laatste vraag
             let button = document.getElementById("submit");
             button.textContent = "Finish"
@@ -122,6 +129,7 @@ const TienRonden = () => {
             sections[0].insertAdjacentHTML("afterbegin",`<article>
             <h2><strong>Gefeliciteerd!</strong><h2>
             <p>je hebt een score van ${score}</p></article>`);
+
         }
     })
 }
@@ -142,7 +150,7 @@ const SuddenDeath = () => {
             let inputElements = document.getElementsByTagName("input");
             let sections = document.getElementsByClassName("SuddenDeath");
             let article = document.getElementsByClassName("vraag");
-            if(rounds>0){    // indien er een ronde is geweest => controleert het antwoord
+            if(rounds>1){    // indien er een ronde is geweest => controleert het antwoord
                 document.getElementById("submit").style.display = "block";
                 let lastQuote = response[0].docs[lastQuoteIndex];
                 let lastCharacter  = {_id:"",height:"",race:"",gender:"",birth:"",spouse:"",death:"",realm:"",hair:"",name:"",wikiUrl:""};
@@ -185,7 +193,13 @@ const SuddenDeath = () => {
                        }
                     }
                 }
-            }  
+            }
+            if(inputElements[inputElements.length-1].checked){
+                blacklistItems.push([lastQuote.dialog, document.getElementsByTagName("textarea")[0].value]);
+            }else if(inputElements[inputElements.length-2].checked){
+                favorites.push([lastQuote.dialog, lastCharacter.name]);
+            }
+
             if(!checkedExists && rounds > 1){
                 CorrectAnswer = false;
                 article[0].remove();
@@ -207,7 +221,7 @@ const SuddenDeath = () => {
                 }
             }
             let characters = [character, response[1].docs[Math.floor(Math.random() * response[1].docs.length)], response[1].docs[Math.floor(Math.random() * response[1].docs.length)]];
-            // shuffle(characters);
+            shuffle(characters);
             let movie  = {_id:"",name:"",runtimeInMinutes:0,budgetInMillions:0,boxOfficeRevenueInMillions:0,academyAwardNominations:0,academyAwardWins:0,rottenTomatoesScore:0};
             for(let i  = 0;i<response[2].docs.length;i++){
                 if (response[2].docs[i]._id === quote.movie){
@@ -215,7 +229,7 @@ const SuddenDeath = () => {
                 }
             }
             let movies = [movie, response[2].docs[Math.floor(Math.random() * response[2].docs.length)], response[2].docs[Math.floor(Math.random() * response[2].docs.length)]];
-            // shuffle(movies);
+            shuffle(movies);
             let h2 = document.getElementsByTagName("h2");
             sections[0].insertAdjacentHTML("afterbegin",`<article class="vraag" ><p><strong>quote:</strong> ${quote.dialog}</p> <br/>
                 <p>Van welk personage komt deze quote?</p>
@@ -224,36 +238,38 @@ const SuddenDeath = () => {
                 <input type="radio" id="character1" name="character" value="${characters[0].name}">
                 <label for="character1">${characters[0].name}</label>
                 </section>
-
                 <section class="test">
                 <input type="radio" id="character2" name="character" value="${characters[1].name}">
                 <label for="character2">${characters[1].name}</label>
                 </section>
-
                 <section class="test">
                 <input type="radio" id="character3" name="character" value="${characters[2].name}">
                 <label for="character3">${characters[2].name}</label>
                 </section> <br/>
-
                 <p>Uit welke film komt deze quote?</p> 
-
                 <section class="test">
                 <input type="radio" id="movies1" name="movie" value="${movies[0].name}">
                 <label for="movies1">${movies[0].name}</label>
                 </section>
-
                 <section class="test">
                 <input type="radio" id="movies2" name="movie" value="${movies[1].name}">
                 <label for="movies2">${movies[1].name}</label>
                 </section> 
-
                 <section class="test">
                 <input type="radio" id="movies3" name="movie" value="${movies[2].name}">
                 <label for="movies3">${movies[2].name}</label>
                 </section>
-</article>`);
-            console.log(score);
-            console.log(rounds);    
+                <p>Extra opties</p> 
+                <section class="test">
+                <input type="radio" id="favorite" name="addToDB"">
+                <label for="favorite">toevoegen aan favorieten</label>
+                </section>
+                <section class="test">
+                <input type="radio" id="blacklist" name="addToDB"">
+                <label for="blacklist">toevoegen aan blacklist</label>
+                </section>
+                <textarea id="blacklistReden" name="blacklistReden" rows="4" cols="50" placeholder="Geef een reden voor de blacklist"></textarea>
+            </article>`);
         }
     })
 }

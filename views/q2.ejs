@@ -36,9 +36,58 @@
     <main>
       <h2>Sudden Death</h2>
       <section class="SuddenDeath">
-        <article class="vraag"></article>
+        <article class="vraag" >
+          <% if(unfinished){ %>
+          <form action="/LOTR/quiz2" method="post">
+          <p><strong>quote:</strong> <%=quote.dialog%></p> <br/>
+          <p>Van welk personage komt deze quote?</p>
+          <section class="test">   
+          <input type="radio" id="character1" name="character" value="<%=characters[0].name%>">
+          <label for="character1"><%=characters[0].name%></label>
+          </section>
+          <section class="test">
+          <input type="radio" id="character2" name="character" value="<%=characters[1].name%>">
+          <label for="character2"><%=characters[1].name%></label>
+          </section>
+          <section class="test">
+          <input type="radio" id="character3" name="character" value="<%=characters[2].name%>">
+          <label for="character3"><%=characters[2].name%></label>
+          </section> <br/>
+          <p>Uit welke film komt deze quote?</p> 
+          <section class="test">
+          <input type="radio" id="movies1" name="movie" value="<%=movies[0].name%>">
+          <label for="movies1"><%=movies[0].name%></label>
+          </section>
+          <section class="test">
+          <input type="radio" id="movies2" name="movie" value="<%=movies[1].name%>">
+          <label for="movies2"><%=movies[1].name%></label>
+          </section> 
+          <section class="test">
+          <input type="radio" id="movies3" name="movie" value="<%=movies[2].name%>">
+          <label for="movies3"><%=movies[2].name%></label>
+          </section>
+          <p>Extra opties</p> 
+          <section class="test">
+            <input type="radio" id="none" name="addToDB" value="none">
+            <label for="none">geen extra opties</label>          
+          </section>
+          <section class="test">
+            <input type="radio" id="favorite" name="addToDB" value="favorite">
+            <label for="favorite">toevoegen aan favorieten</label>          
+          </section>
+          <section class="test">
+            <input type="radio" id="blacklist" name="addToDB" value="blacklist">
+            <label for="blacklist">toevoegen aan blacklist</label>
+          </section>
+          <textarea id="blacklistReden" name="blacklistReden" rows="4" cols="50" placeholder="Geef een reden voor de blacklist"></textarea>
+          <br/></bt><button type="submit">Submit</button>  
+          </form>
+          <% }else{ %>
+            <h2>Gefeliciteerd!</h2>
+            <p>Je hebt het <%= rounds %> ronden volgehouden voor een score van <%= score/2 %>/<%= rounds %></p>
+            <% } %>
+        </article>      
       </section>
-      <button id="submit" onclick="SuddenDeath()">submit</button>
     </main>
   </body>
 </html>

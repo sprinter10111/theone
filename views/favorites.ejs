@@ -44,7 +44,7 @@
             <%- '<tr>' %>
               <%- '<td>' + favorites[i].quote + '</td>' %>
               <%- '<td>' + favorites[i].character + '</td>' %>
-              <%- '<td><button href="http:/localhost:3000/removefavorite/' + i + '"></button></td>' %>
+              <%- '<td><a href="/removefavorite/' + i + '"><input type="submit" value="Verwijder"/></a></td>' %>
             <% '</tr>' %>
           <% } %>
         </table>

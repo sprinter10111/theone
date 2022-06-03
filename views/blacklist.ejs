@@ -42,9 +42,9 @@
           </tr>
           <% for(let i = 0;i<blacklist.length;i++){ %>
             <%- '<tr>' %>
-              <%- '<td>' + blacklist[i].quote + '</td>' %>
+              <%- '<td><a href="/blacklistItem/' + i + '">' + blacklist[i].quote + '</a></td>' %>
               <%- '<td>' + blacklist[i].reden + '</td>' %>
-              <%- '<td><button href="http:/localhost:3000/removeblacklistitem/' + i + '"></button></td>' %>
+              <%- '<td><a href="/removeblacklistitem/' + i + '"><input type="submit" value="Verwijder"/></a></td>' %>
             <% '</tr>' %>
           <% } %>
         </table>
