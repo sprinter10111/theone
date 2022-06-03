@@ -44,6 +44,9 @@ let doSomeDBCalls = async () => {
     app.get("/", (req, res) => {
       res.render("index");
     });
+    app.get("/error", (req, res) => {
+      res.render("error");
+    });
     app.get("/LOTR", (req, res) => {
       res.render("quiz");
     });
