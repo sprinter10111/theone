@@ -72,7 +72,7 @@ let doSomeDBCalls = async () => {
             }
         }
         characters = [character, allCharacters.docs[Math.floor(Math.random() * allCharacters.docs.length)], allCharacters.docs[Math.floor(Math.random() * allCharacters.docs.length)]];//array met het correcte antwoord en 2 random characters
-        // shuffle(characters);
+        shuffle(characters);
         let movie  = {_id:"",name:"",runtimeInMinutes:0,budgetInMillions:0,boxOfficeRevenueInMillions:0,academyAwardNominations:0,academyAwardWins:0,rottenTomatoesScore:0};
         for(let i  = 0;i<allMovies.docs.length;i++){// zoekt de film die bij de quote hoort
             if (allMovies.docs[i]._id === quote.movie){
@@ -80,7 +80,7 @@ let doSomeDBCalls = async () => {
             }
         }
         movies = [movie, allMovies.docs[Math.floor(Math.random() * allMovies.docs.length)], allMovies.docs[Math.floor(Math.random() * allMovies.docs.length)]];//array met het correcte antwoord en 2 random filmen
-        // shuffle(movies);
+        shuffle(movies);
         }
         res.render("q1", {quote: quote, characters: characters, movies: movies, score: score, unfinished: true});
       }if (rounds >= 10){
@@ -141,7 +141,7 @@ let doSomeDBCalls = async () => {
             }
         }
         characters = [character, allCharacters.docs[Math.floor(Math.random() * allCharacters.docs.length)], allCharacters.docs[Math.floor(Math.random() * allCharacters.docs.length)]];//array met het correcte antwoord en 2 random characters
-        // shuffle(characters);
+        shuffle(characters);
         let movie  = {_id:"",name:"",runtimeInMinutes:0,budgetInMillions:0,boxOfficeRevenueInMillions:0,academyAwardNominations:0,academyAwardWins:0,rottenTomatoesScore:0};
         for(let i  = 0;i<allMovies.docs.length;i++){// zoekt de film die bij de quote hoort
             if (allMovies.docs[i]._id === quote.movie){
@@ -149,7 +149,7 @@ let doSomeDBCalls = async () => {
             }
         }
         movies = [movie, allMovies.docs[Math.floor(Math.random() * allMovies.docs.length)], allMovies.docs[Math.floor(Math.random() * allMovies.docs.length)]];//array met het correcte antwoord en 2 random filmen
-        // shuffle(movies);
+        shuffle(movies);
         }
         res.render("q2", {quote: quote, characters: characters, movies: movies, score: score, unfinished: SuddenDeathCorrectAnswer});
       }else{
