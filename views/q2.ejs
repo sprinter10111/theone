@@ -135,7 +135,7 @@
               cols="50"
               placeholder="Geef een reden voor de blacklist"
             ></textarea>
-            <br /><button type="submit">Submit</button>
+            <br /><button type="submit">Volgende</button>
           </form>
           <% }else{ %>
           <h2>Gefeliciteerd!</h2>
@@ -143,6 +143,15 @@
             Je hebt het <%= rounds %> ronden volgehouden voor een score van <%=
             score/2 %>/<%= rounds %>
           </p>
+          <p>
+            Indien je je score wilt opslaan op het leaderboard
+            geef dan een gebruikersnaam in en druk op volgende.
+            Indien niet kan je de pagina verlaten 
+          </p>
+          <form action="/addhighscore/<%= score/2 %>/<%= rounds %>?type=suddenDeath", method="post">
+            <input type="text" id="username" name="username" placeholder="username">
+            <button type="submit">Submit</button>
+          </form>
           <% } %>
         </article>
       </section>

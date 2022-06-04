@@ -2,12 +2,14 @@ const express = require("express");
 const app = express();
 const ejs = require("ejs"); // EJS import
 const axios = require('axios');
+const fs = require('fs');
 
 const uri =
   "mongodb+srv://YJSK:LOTRYJSK@theone.4lvoc.mongodb.net/TheOne?retryWrites=true&w=majority";
 const { MongoClient, ObjectId } = require("mongodb");
 const req = require("express/lib/request");
 const res = require("express/lib/response");
+const { type } = require("express/lib/response");
 //const uri = "mongodb+srv://<username>:<password>@<your-cluster-url>/test?retryWrites=true&w=majority
 const client = new MongoClient(uri, { useUnifiedTopology: true });
 
@@ -87,7 +89,7 @@ let doSomeDBCalls = async () => {
         }
         res.render("q1", {quote: quote, characters: characters, movies: movies, score: score, unfinished: true});
       }if (rounds >= 10){
-        res.render("q1", {score: score, unfinished: false});
+        res.render("q1", {score: score, rounds: rounds, unfinished: false});
         score = 0;
         rounds = 0;
       }
@@ -196,6 +198,35 @@ let doSomeDBCalls = async () => {
       }    
     });
 
+    let highscoreCursor = client.db("TheOne").collection("High_score").find({});
+    let highscores = await highscoreCursor.toArray();
+
+    app.get("/highscore", (req, res) => {
+      highscores.sort((a, b) => {
+        return b.score-a.score;
+      });
+      let filteredHighscores = [...highscores];
+      if(req.query.filter != undefined){
+        filteredHighscores = highscores.filter(e => e.type === req.query.filter);
+      }
+      res.render("highscore", {highscores: filteredHighscores});
+    });
+
+    app.post("/addhighscore/:score/:rounds", async (req, res) => {
+      await client.connect();
+      let highscore = {
+        _id: ObjectId(),
+        username: req.body.username,
+        score: req.params.score,
+        rounds: req.params.rounds,
+        type: req.query.type
+      };
+      highscores.push(highscore);
+      await client.db("TheOne").collection("High_score").insertOne(highscore);
+      res.redirect("/highscore");
+      await client.close();
+    });
+
     let blacklistCursor = client.db("TheOne").collection("Blacklist").find({});
     let blacklist = await blacklistCursor.toArray();
 
@@ -214,7 +245,6 @@ let doSomeDBCalls = async () => {
       res.redirect("/blacklist");
       await client.close();
     });
-
     app.get("/addedBlacklistitem", async (req, res) => {
       await client.connect();
       
@@ -254,7 +284,20 @@ let doSomeDBCalls = async () => {
     let favorites = await favoritesCursor.toArray();
 
     app.get("/favorites", (req, res) => {
-      res.render("favorites", { favorites: favorites });
+      let printContent = "";
+      for(let i = 0;i<favorites.length;i++){
+        printContent += `${favorites[i].quote}\t${favorites[i].character}\n`;
+      }
+      fs.writeFile('./public/favorites.txt', printContent, err => {
+        if(err){
+          console.log(err);
+        }
+      })
+      let filteredFavorites = [...favorites];
+      if (req.query.filter != undefined){
+        filteredFavorites = favorites.filter(e => e.character === req.query.filter);
+      }
+      res.render("favorites", { favorites: filteredFavorites });
     });
 
     app.get("/addedfavorite", async (req, res) => {
@@ -266,6 +309,15 @@ let doSomeDBCalls = async () => {
       };
       favorites.push(favorite);
       await client.db("TheOne").collection("Favorites").insertOne(favorite);
+      let printContent;
+      for(let i = 0;i<favorites.length;i++){
+        printContent += `${favorites[i].quote}\t${favorites[i].character}\n`;
+      }
+      fs.writeFile('./public/favorites.txt', printContent, err => {
+        if(err){
+          console.log(err);
+        }
+      })
       if(req.query.quizType === "tienRonden"){
         res.redirect("/LOTR/1");  
       }else{
@@ -285,18 +337,29 @@ let doSomeDBCalls = async () => {
         .collection("Favorites")
         .find({});
       favorites = await favoritesCursor.toArray();
+      let printContent;
+      for(let i = 0;i<favorites.length;i++){
+        printContent += `${favorites[i].quote}\t${favorites[i].character}\n`;
+      }
+      fs.writeFile('./public/favorites.txt', printContent, err => {
+        if(err){
+          console.log(err);
+        }
+      })
       res.redirect("/favorites");
       await client.close();
     });
 
-    /*app.listen(app.get("port"), () =>
-      console.log("[server] http://localhost:" + app.get("port"))
-    );*/
-    
-    app.set('port', (process.env.PORT || 5000));
-    app.listen(app.get('port'), function() { });
-    
+    app.post("/printFavorites", (req, res) => {
+      res.download('./public/favorites.txt');
+    });
 
+     app.listen(app.get("port"), () =>
+      console.log("[server] http://localhost:" + app.get("port"))
+    );
+
+    /*app.set('port', (process.env.PORT || 5000));
+    app.listen(app.get('port'), function() { });*/
 
     // Make the appropriate DB calls
     //...
