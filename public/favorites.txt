@@ -2,3 +2,5 @@ Hey watch the pumpkin.	MINOR_CHARACTER
 Smeagol? SMEAGOL! SMEAGOL!	Frodo Baggins
 Et E'rello Endorenna ut'lien. Sinome maruvan ar Hildinyar tenn' Ambar-metta!	Aragorn II Elessar
 What's happening out there?	Gimli
+You must lead the peopleto Helm's Deep, and make haste.	Théoden
+They exaggerate. The victory belongs to Faramir also.	Boromir
