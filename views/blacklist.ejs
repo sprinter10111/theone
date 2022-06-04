@@ -33,44 +33,40 @@
       </div>
     </header>
     <nav class="submenu">
-      <ul>
+      <ul class="sidenav">
         <li><a href="/LOTR">quiz</a></li>
         <li><a href="/blacklist">blacklist</a></li>
         <li><a href="/favorites">favorite</a></li>
       </ul>
     </nav>
     <main>
-      <article class="blacklist">
-        <table class="blacklist-table">
-          <tr>
-            <th>Quote</th>
-            <th>Reden</th>
-            <th>Verwijder</th>
-          </tr>
-          <% for(let i = 0;i<blacklist.length;i++){ %>
-            <%- '<tr>' %>
-              <%- '<td><a href="/blacklistItem/' + i + '">' + blacklist[i].quote + '</a></td>' %>
-              <%- '<td>' + blacklist[i].reden + '</td>' %>
-              <%- '<td><a href="/removeblacklistitem/' + i + '"><input type="submit" value="Verwijder"/></a></td>' %>
-            <% '</tr>' %>
-          <% } %>
-        </table>
-      </article>
+      <section class="blacklist_section">
+        <article class="blacklist">
+          <table class="blacklist-table">
+            <tr>
+              <th>Quote</th>
+              <th>Reden</th>
+              <th>Verwijder</th>
+            </tr>
+            <% for(let i = 0;i<blacklist.length;i++){ %>
+             <%- '<tr>' %>
+                <%- '<td><a href="/blacklistItem/' + i + '">' + blacklist[i].quote + '</a></td>' %>
+                <%- '<td class="reden"><p>' + blacklist[i].reden + '</p></td>' %>
+                <%- '<td><a href="/removeblacklistitem/' + i + '"><input type="submit" value="Verwijder"/></a></td>' %>
+              <% '</tr>' %>
+            <% } %>
+          </table>
+        </article>
+    </section>
     </main>
     <footer>
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla ipsam
-        nisi quam accusamus provident cum, perferendis eius praesentium maiores
-        expedita! Nihil, in commodi quasi cupiditate ipsa voluptatibus excepturi
-        culpa sequi minus illo eligendi ullam numquam dolorum, doloribus
-        necessitatibus optio quas vitae dolor atque eaque. Aliquam nam,
-        reprehenderit veritatis facere, a cumque neque officia molestias rem
-        laborum quia quod delectus velit corrupti sapiente quae quas minima quos
-        magnam totam illo quam adipisci. Ex hic fuga cum. Amet adipisci suscipit
-        fuga dignissimos velit dicta cum a cumque accusantium? Quidem cum
-        reiciendis itaque animi? Doloribus excepturi sequi magni labore deleniti
-        ducimus esse molestias.
-      </p>
+      <h4>Gemaakt:</h4>
+      <ul>
+        <li>Jonas Vael</li>
+        <li>Yassine Ouadi</li>
+        <li>Siemen De Beukelaer</li>
+        <li>Karel van Daele</li>
+      </ul>
     </footer>
   </body>
 </html>

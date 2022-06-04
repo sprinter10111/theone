@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="css/style.css" />
-    <script src="js/script.js" defer></script>
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/script.js" defer></script>
   </head>
   <body class="grid-container">
     <header>
@@ -17,12 +17,12 @@
         <img
           onclick="myFunction()"
           class="dropbtn"
-          src="assets/pngegg (5).png"
+          src="/assets/pngegg (5).png"
           alt=""
         />
         <div id="myDropdown" class="dropdown-content">
-          <a href="index.html">Home</a>
-          <a href="quiz.html">THE ONE</a>
+          <a href="/">Home</a>
+          <a href="/LOTR">THE ONE</a>
           <a href="#">Fifa</a>
           <a href="#">Fortnite</a>
           <a href="#">LegoMasters</a>
@@ -32,29 +32,41 @@
         </div>
       </div>
     </header>
+    <nav class="submenu">
+      <ul class="sidenav">
+        <li><a href="/LOTR">quiz</a></li>
+        <li><a href="/blacklist">blacklist</a></li>
+        <li><a href="/favorites">favorite</a></li>
+      </ul>
+    </nav>
     <main>
-      <article class="blacklist">
-        <form action="/updateblacklistitem/<%=keuze%>" method="post">
+      <section class="blacklist_section">
+        <article class="blacklist">
+          <form action="/updateblacklistitem/<%=keuze%>" method="post">
             <p><%= blacklist[keuze].quote %></p>
-            <textarea id="blacklistReden" name="blacklistReden" rows="4" cols="50" placeholder="Geef een reden voor de blacklist" required><%= blacklist[keuze].reden %></textarea>
-            <br/><button type="submit">Submit</button>  
-        </form>
-      </article>
+            <textarea
+              id="blacklistReden"
+              name="blacklistReden"
+              rows="4"
+              cols="50"
+              placeholder="Geef een reden voor de blacklist"
+              required
+            >
+<%= blacklist[keuze].reden %></textarea
+            >
+            <br /><button type="submit">Submit</button>
+          </form>
+        </article>
+      </section>
     </main>
     <footer>
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla ipsam
-        nisi quam accusamus provident cum, perferendis eius praesentium maiores
-        expedita! Nihil, in commodi quasi cupiditate ipsa voluptatibus excepturi
-        culpa sequi minus illo eligendi ullam numquam dolorum, doloribus
-        necessitatibus optio quas vitae dolor atque eaque. Aliquam nam,
-        reprehenderit veritatis facere, a cumque neque officia molestias rem
-        laborum quia quod delectus velit corrupti sapiente quae quas minima quos
-        magnam totam illo quam adipisci. Ex hic fuga cum. Amet adipisci suscipit
-        fuga dignissimos velit dicta cum a cumque accusantium? Quidem cum
-        reiciendis itaque animi? Doloribus excepturi sequi magni labore deleniti
-        ducimus esse molestias.
-      </p>
+      <h4>Gemaakt:</h4>
+      <ul>
+        <li>Jonas Vael</li>
+        <li>Yassine Ouadi</li>
+        <li>Siemen De Beukelaer</li>
+        <li>Karel van Daele</li>
+      </ul>
     </footer>
   </body>
 </html>
