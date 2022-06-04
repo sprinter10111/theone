@@ -40,26 +40,31 @@
       </ul>
     </nav>
     <main>
-      <article class="favorites">
-        <a href="/favorites?filter=' + favorites[i].character + '">Toon' + favorites[i].character + 'favorieten</a>
-        <table class="favorites-table">
+      <article class="blacklist">
+        <table class="blacklist-table">
+        <a href="/highscore?filter=tienRonden"><input type="submit" value="Toon Tien Ronden Quiz"/></a>
+        <a href="/highscore?filter=suddenDeath"><input type="submit" value="Toon Sudden Death Quiz"/></a>
+        <a href="/highscore"><input type="submit" value="Toon alles"/></a>
           <tr>
-            <th>Quote</th>
-            <th>Character</th>
-            <th>Verwijder</th>
+            <th>Speler</th>
+            <th>Score</th>
           </tr>
-          <% for(let i = 0;i<favorites.length;i++){ %>
+          <% if(highscores.length < 10){ %>
+          <% for(let i = 0;i<highscores.length;i++){ %>
             <%- '<tr>' %>
-              <%- '<td>' + favorites[i].quote + '</td>' %>
-              <%- '<td><a href="https://lotr.fandom.com/wiki/' + favorites[i].character + '">' + favorites[i].character + '</a></td>' %>
-              <%- '<td><a href="/favorites?filter=' + favorites[i].character + '"><input type="submit" value="Toon' + favorites[i].character + '"/></a></td>' %>
-              <%- '<td><a href="/removefavorite/' + i + '"><input type="submit" value="Verwijder"/></a></td>' %>
-            <%- '</tr>' %>
+              <%- '<td>' + highscores[i].username + '</td>' %>
+              <%- '<td>' + highscores[i].score + '/' + highscores[i].rounds + '</td>' %>
+            <% '</tr>' %>
           <% } %>
+          <% }else{ %>
+            <% for(let i = 0;i<10;i++){ %>
+                <%- '<tr>' %>
+                  <%- '<td>' + highscores[i].username + '</td>' %>
+                  <%- '<td>' + highscores[i].score + '</td>' %>
+                <% '</tr>' %>
+            <% } %>          
+           <% } %>
         </table>
-        <form action="printFavorites" method="post">
-        <button type="submit">Print favorites</button>
-        </form>
       </article>
     </main>
     <footer>
