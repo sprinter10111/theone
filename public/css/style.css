@@ -255,13 +255,19 @@ footer {
   margin: 1rem;
   padding: 1rem;
   min-height: 44rem;
-  min-width: 60%;
-  
+  min-width: 60%;  
 }
+
+  .blacklist_section, .favorites_section, .highscore_section{
+    color:white;
+
+  }
+  
+
 .blacklist{
   margin: 1rem;
   padding: 1rem;
-  background-color: rgba(53, 55, 55,0.95);
+  background-color: rgba(53, 55, 55,0.99);
   width: auto;
   min-height: auto;
 }
