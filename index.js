@@ -346,7 +346,7 @@ let doSomeDBCalls = async () => {
       await client.close();
     });
 
-    app.post("/printFavorites", (req, res) => {
+    app.post("/printfavorites", (req, res) => {
       res.download('./public/favorites.txt');
     });
 
