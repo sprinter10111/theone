@@ -204,10 +204,6 @@ footer {
 .titel{
   padding: 1rem 1rem 1rem 0rem;
 }
-.start{
-  color: rgb(131, 131, 18);
-  padding: 1rem 1rem 1rem 0rem;
-}
 /*alles over quiz 1*/
 .quiz1 {
   width: 100%;
@@ -246,7 +242,7 @@ footer {
 
 /*blacklist pagina*/
 
-.blacklist_section, .favorites_section{
+.blacklist_section, .favorites_section, .highscore_section, .quiz_section{
   width: 100%;
   margin: 1rem;
   padding: 1rem;
@@ -297,8 +293,11 @@ footer {
   .submenu li {
     float: none;
   }
+  .text6 {
+    font-size: 1rem;
+  }
 
-  .blacklist_section, .favorites_section{
+  .blacklist_section, .favorites_section, .highscore_section, .quiz_section{
     margin: 0;
     padding: 0;
   }

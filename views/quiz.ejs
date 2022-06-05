@@ -1,86 +1,33 @@
-<!DOCTYPE html>
-<html lang="nl-BE">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/style.css" />
-    <script src="/js/script.js" defer></script>
-  </head>
-  <body class="grid-container">
-    <header>
-      <section class="text">
-        <h2>The Lord of The Rings</h2>
-      </section>
-      <div class="dropdown">
-        <img
-          onclick="myFunction()"
-          class="dropbtn"
-          src="/assets/pngegg (5).png"
-          alt=""
-        />
-        <div id="myDropdown" class="dropdown-content">
-          <a href="/">Home</a>
-          <a href="/LOTR">THE ONE</a>
-          <a href="#">Fifa</a>
-          <a href="#">Fortnite</a>
-          <a href="#">LegoMasters</a>
-          <a href="#">Magic The Gathering</a>
-          <a href="#">Nationale Bank (NBB)</a>
-          <a href="#">Contact</a>
-        </div>
-      </div>
-    </header>
-    <nav class="submenu">
-      <ul class="sidenav">
-        <li><a href="/LOTR">quiz</a></li>
-        <li><a href="/blacklist">blacklist</a></li>
-        <li><a href="/favorites">favorite</a></li>
-      </ul>
-    </nav>
-    <main>
-      <h2>choose your quiz</h2>
-      <section class="allQuiz">
-        <article class="item e6">
-          <img src="/assets/gollum.webp" alt="is de golum" />
-          <section class="text6">
-            <h3 class="titel">10 rounds</h3>
-            <p class="description">
-              Per goede combinatie 1 punt, als 1 stukje juist is 0,5 Na 10
-              vragen stopt het spel en komt de eindscore op het scherm Je krijgt
-              ook te zien wat de high score was denk jij dat je het brein er
-              voor hebt?
-            </p>
-            <a class="start" href="/LOTR/1" alt="de start van de 10 rounds"
-              >START</a
-            >
-          </section>
-        </article>
-        <article class="item e6">
-          <img src="/assets/2.jpg" alt="is de golum" />
-          <section class="text6">
-            <h3 class="titel">Sudden Death</h3>
-            <p class="description">
-              Per goede combinatie 1 punt Bij een fout (half)antwoord krijg je
-              te zien hoeveel er na elkaar goed waren Je krijgt ook te zien wat
-              de high score was
-            </p>
-            <a class="start" href="/LOTR/2" alt="de start van de Sudden Death "
-              >START</a
-            >
-          </section>
-        </article>
-      </section>
-    </main>
-    <footer>
-      <h4>Gemaakt:</h4>
-      <ul>
-        <li>Jonas Vael</li>
-        <li>Yassine Ouadi</li>
-        <li>Siemen De Beukelaer</li>
-        <li>Karel van Daele</li>
-      </ul>
-    </footer>
-  </body>
-</html>
+<%- include('./partials/header'); %>
+<main>
+  <h2>choose your quiz</h2>
+  <section class="allQuiz">
+    <article class="item e6">
+      <a href="/LOTR/1" alt="de start van de 10 rounds">
+        <img src="/assets/gollum.webp" alt="is de golum" />
+        <section class="text6">
+          <h3 class="titel">10 rounds</h3>
+          <p class="description">
+            Per goede combinatie 1 punt, als 1 stukje juist is 0,5 Na 10 vragen
+            stopt het spel en komt de eindscore op het scherm Je krijgt ook te
+            zien wat de high score was denk jij dat je het brein er voor hebt?
+          </p>
+        </section>
+      </a>
+    </article>
+    <article class="item e6">
+      <a href="/LOTR/2" alt="de start van de Sudden Death ">
+        <img src="/assets/2.jpg" alt="is de golum" />
+        <section class="text6">
+          <h3 class="titel">Sudden Death</h3>
+          <p class="description">
+            Per goede combinatie 1 punt Bij een fout (half)antwoord krijg je te
+            zien hoeveel er na elkaar goed waren Je krijgt ook te zien wat de
+            high score was
+          </p>
+        </section>
+      </a>
+    </article>
+  </section>
+</main>
+<%- include('./partials/footer'); %>

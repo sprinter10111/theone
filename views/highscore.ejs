@@ -1,45 +1,6 @@
-<!DOCTYPE html>
-<html lang="nl-BE">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="css/style.css" />
-    <script src="js/script.js" defer></script>
-  </head>
-  <body class="grid-container">
-    <header>
-      <section class="text">
-        <h2>The Lord of The Rings</h2>
-      </section>
-      <div class="dropdown">
-        <img
-          onclick="myFunction()"
-          class="dropbtn"
-          src="assets/pngegg (5).png"
-          alt=""
-        />
-        <div id="myDropdown" class="dropdown-content">
-          <a href="/">Home</a>
-          <a href="quiz.html">THE ONE</a>
-          <a href="#">Fifa</a>
-          <a href="#">Fortnite</a>
-          <a href="#">LegoMasters</a>
-          <a href="#">Magic The Gathering</a>
-          <a href="#">Nationale Bank (NBB)</a>
-          <a href="#">Contact</a>
-        </div>
-      </div>
-    </header>
-    <nav class="submenu">
-      <ul>
-        <li><a href="/LOTR">quiz</a></li>
-        <li><a href="/blacklist">blacklist</a></li>
-        <li><a href="/favorites">favorite</a></li>
-      </ul>
-    </nav>
+<%- include('./partials/header'); %>
     <main>
+      <section class="highscore_section">
       <article class="blacklist">
         <table class="blacklist-table">
         <a href="/highscore?filter=tienRonden"><input type="submit" value="Toon Tien Ronden Quiz"/></a>
@@ -66,21 +27,6 @@
            <% } %>
         </table>
       </article>
+    </section>
     </main>
-    <footer>
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla ipsam
-        nisi quam accusamus provident cum, perferendis eius praesentium maiores
-        expedita! Nihil, in commodi quasi cupiditate ipsa voluptatibus excepturi
-        culpa sequi minus illo eligendi ullam numquam dolorum, doloribus
-        necessitatibus optio quas vitae dolor atque eaque. Aliquam nam,
-        reprehenderit veritatis facere, a cumque neque officia molestias rem
-        laborum quia quod delectus velit corrupti sapiente quae quas minima quos
-        magnam totam illo quam adipisci. Ex hic fuga cum. Amet adipisci suscipit
-        fuga dignissimos velit dicta cum a cumque accusantium? Quidem cum
-        reiciendis itaque animi? Doloribus excepturi sequi magni labore deleniti
-        ducimus esse molestias.
-      </p>
-    </footer>
-  </body>
-</html>
+    <%- include('./partials/footer'); %>
