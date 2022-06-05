@@ -251,8 +251,8 @@ footer {
   
 }
 .blacklist{
-  margin: 2rem;
-  padding: 2rem;
+  margin: 1rem;
+  padding: 1rem;
   background-color: rgba(53, 55, 55);
   width: auto;
   min-height: auto;
@@ -266,14 +266,15 @@ footer {
 
 /*favorites pagina*/
 .favorites{
-  margin: 2rem;
-  padding: 2rem;
+  margin: 1rem;
+  padding: 1rem;
   background-color: rgba(53, 55, 55);
   width: auto;
   min-height: auto;
 }
 .favorites-table, .blacklist-table{
   width: 100%;
+  text-overflow: ellipsis;
 }
 .favorites-table th, .favorites-table td {
   width: auto;
@@ -289,9 +290,15 @@ footer {
     margin: 0;
     padding: 0;
   }
-  
+  .submenu{
+  }
   .submenu li {
     float: none;
+  }
+  .submenu li a{
+    font-size: 1rem;
+    padding: 0.5rem;
+
   }
   .text6 {
     font-size: 1rem;
@@ -302,7 +309,11 @@ footer {
     padding: 0;
   }
 
-  .blacklist .favorites{ 
-    margin: 0;
+  .blacklist, .favorites, .highscore{ 
+    margin: 0.5rem;
   }
+  .favorites-table th, .favorites-table td {
+    padding: 0.3rem;
+  }
+
 }

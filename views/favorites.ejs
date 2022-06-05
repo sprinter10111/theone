@@ -1,8 +1,7 @@
 <%- include('./partials/header'); %>
     <main>
       <section class="favorites_section">
-      <article class="favorites">
-        <a href="/favorites?filter=' + favorites[i].character + '">Toon' + favorites[i].character + 'favorieten</a>
+      <article class="favorites">    
         <table class="favorites-table">
           <tr>
             <th>Quote</th>
@@ -13,7 +12,6 @@
             <%- '<tr>' %>
               <%- '<td>' + favorites[i].quote + '</td>' %>
               <%- '<td><a href="https://lotr.fandom.com/wiki/' + favorites[i].character + '">' + favorites[i].character + '</a></td>' %>
-              <%- '<td><a href="/favorites?filter=' + favorites[i].character + '"><input type="submit" value="Toon' + favorites[i].character + '"/></a></td>' %>
               <%- '<td><a href="/removefavorite/' + i + '"><input type="submit" value="Verwijder"/></a></td>' %>
             <%- '</tr>' %>
           <% } %>
