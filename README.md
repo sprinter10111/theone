@@ -1,2 +1,2 @@
 # theone
-it projects the one 
+Dit is een quiz over quotes uit lord of the rings. Er zijn 2 mogelijke manieren om de quiz te ondergaan. Een quiz van 10 ronden die op het einde je totaalscore laat zien, en een suddendeath quiz die verder blijft vragen to je 1 fout begaat en dan je score laat zien. Je kan de top 10 highscores zien van beide soorten quizzen, de blacklist met quotes die niet getoond worden in de quiz en de favoriete quotes.
