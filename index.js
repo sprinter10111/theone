@@ -253,6 +253,10 @@ let doSomeDBCalls = async () => {
         quote: req.query.quote,
         reden: req.query.blacklistReden
       };
+      if(blacklistItem.reden != ""){
+        blacklist.push(blacklistItem);
+        await client.db("TheOne").collection("Blacklist").insertOne(blacklistItem);
+      }
       if(req.query.quizType === "tienRonden"){
         res.redirect("/LOTR/1");  
       }else{
@@ -350,13 +354,13 @@ let doSomeDBCalls = async () => {
       res.download('./public/favorites.txt');
     });
 
-     /*app.listen(app.get("port"), () =>
+     app.listen(app.get("port"), () =>
        console.log("[server] http://localhost:" + app.get("port"))
-     );*/
-    
+     );
+    /*
     app.set('port', (process.env.PORT || 5000));
     app.listen(app.get('port'), function() { });
-    
+    */
     // Make the appropriate DB calls
     //...
   } catch (e) {
