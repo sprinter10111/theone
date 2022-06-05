@@ -253,10 +253,6 @@ let doSomeDBCalls = async () => {
         quote: req.query.quote,
         reden: req.query.blacklistReden
       };
-      if(blacklistItem.reden != ""){
-        blacklist.push(blacklistItem);
-        await client.db("TheOne").collection("Blacklist").insertOne(blacklistItem);
-      }
       if(req.query.quizType === "tienRonden"){
         res.redirect("/LOTR/1");  
       }else{
