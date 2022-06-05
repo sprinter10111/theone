@@ -293,11 +293,7 @@ let doSomeDBCalls = async () => {
           console.log(err);
         }
       })
-      let filteredFavorites = [...favorites];
-      if (req.query.filter != undefined){
-        filteredFavorites = favorites.filter(e => e.character === req.query.filter);
-      }
-      res.render("favorites", { favorites: filteredFavorites });
+      res.render("favorites", { favorites: favorites });
     });
 
     app.get("/addedfavorite", async (req, res) => {
