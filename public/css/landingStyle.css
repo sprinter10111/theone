@@ -105,7 +105,7 @@ a{
 .col img{
   height: 150px;
 }
-@media (max-width: 500px) {
+@media (max-width: 1200px) {
   .flex-grid {
    flex-flow: column;
   }
