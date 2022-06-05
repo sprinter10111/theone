@@ -1,120 +1,95 @@
 <%- include('./partials/header'); %>
 <main>
-  <section class="quiz_section">
-    <section class="TienRonden">
-      <article class="vraag">
-        <% if(unfinished){ %>
-        <form action="/LOTR/quiz1" method="post">
-          <p><strong>quote:</strong> <%=quote.dialog%></p>
-          <br />
-          <p>Van welk personage komt deze quote?</p>
-          <section class="test">
-            <input
-              type="radio"
-              id="character1"
-              name="character"
-              value="<%=characters[0].name%>"
-            />
-            <label for="character1"><%=characters[0].name%></label>
-          </section>
-          <section class="test">
-            <input
-              type="radio"
-              id="character2"
-              name="character"
-              value="<%=characters[1].name%>"
-            />
-            <label for="character2"><%=characters[1].name%></label>
-          </section>
-          <section class="test">
-            <input
-              type="radio"
-              id="character3"
-              name="character"
-              value="<%=characters[2].name%>"
-            />
-            <label for="character3"><%=characters[2].name%></label>
-          </section>
-          <br />
-          <p>Uit welke film komt deze quote?</p>
-          <section class="test">
-            <input
-              type="radio"
-              id="movies1"
-              name="movie"
-              value="<%=movies[0].name%>"
-            />
-            <label for="movies1"><%=movies[0].name%></label>
-          </section>
-          <section class="test">
-            <input
-              type="radio"
-              id="movies2"
-              name="movie"
-              value="<%=movies[1].name%>"
-            />
-            <label for="movies2"><%=movies[1].name%></label>
-          </section>
-          <section class="test">
-            <input
-              type="radio"
-              id="movies3"
-              name="movie"
-              value="<%=movies[2].name%>"
-            />
-            <label for="movies3"><%=movies[2].name%></label>
-          </section>
-          <p>Extra opties</p>
-          <section class="test">
-            <input type="radio" id="none" name="addToDB" value="none" />
-            <label for="none">geen extra opties</label>
-          </section>
-          <section class="test">
-            <input type="radio" id="favorite" name="addToDB" value="favorite" />
-            <label for="favorite">toevoegen aan favorieten</label>
-          </section>
-          <section class="test">
-            <input
-              type="radio"
-              id="blacklist"
-              name="addToDB"
-              value="blacklist"
-            />
-            <label for="blacklist">toevoegen aan blacklist</label>
-          </section>
-          <textarea
-            id="blacklistReden"
-            name="blacklistReden"
-            rows="4"
-            cols=screen.width
-            placeholder="Geef een reden voor de blacklist"
-          ></textarea>
-          <br /><button type="submit">Volgende</button>
-        </form>
-        <% }else{ %>
-        <h2>Gefeliciteerd!</h2>
-        <p>Je hebt een score van <%= score/2 %>/10</p>
-        <p>
-          Indien je je score wilt opslaan op het leaderboard geef dan een
-          gebruikersnaam in en druk op volgende. Indien niet kan je de pagina
-          verlaten
-        </p>
-        <form
-          action="/addhighscore/<%= score/2 %>/<%= rounds %>?type=tienRonden"
-          ,
-          method="post"
-        >
+  <section class="TienRonden">
+    <article class="vraag">
+      <% if(unfinished){ %>
+      <form action="/LOTR/quiz1" method="post">
+        <p><strong>quote:</strong> <%=quote.dialog%></p>
+        <br />
+        <p>Van welk personage komt deze quote?</p>
+        <section class="test">
           <input
-            type="text"
-            id="username"
-            name="username"
-            placeholder="username"
+            type="radio"
+            id="character1"
+            name="character"
+            value="<%=characters[0].name%>"
           />
-          <button type="submit">Submit</button>
-        </form>
-        <% } %>
-      </article>
-    </section>
+          <label for="character1"><%=characters[0].name%></label>
+        </section>
+        <section class="test">
+          <input
+            type="radio"
+            id="character2"
+            name="character"
+            value="<%=characters[1].name%>"
+          />
+          <label for="character2"><%=characters[1].name%></label>
+        </section>
+        <section class="test">
+          <input
+            type="radio"
+            id="character3"
+            name="character"
+            value="<%=characters[2].name%>"
+          />
+          <label for="character3"><%=characters[2].name%></label>
+        </section>
+        <br />
+        <p>Uit welke film komt deze quote?</p>
+        <section class="test">
+          <input
+            type="radio"
+            id="movies1"
+            name="movie"
+            value="<%=movies[0].name%>"
+          />
+          <label for="movies1"><%=movies[0].name%></label>
+        </section>
+        <section class="test">
+          <input
+            type="radio"
+            id="movies2"
+            name="movie"
+            value="<%=movies[1].name%>"
+          />
+          <label for="movies2"><%=movies[1].name%></label>
+        </section>
+        <section class="test">
+          <input
+            type="radio"
+            id="movies3"
+            name="movie"
+            value="<%=movies[2].name%>"
+          />
+          <label for="movies3"><%=movies[2].name%></label>
+        </section>
+        <p>Extra opties</p>
+        <section class="test">
+          <input type="radio" id="none" name="addToDB" value="none" />
+          <label for="none">geen extra opties</label>
+        </section>
+        <section class="test">
+          <input type="radio" id="favorite" name="addToDB" value="favorite" />
+          <label for="favorite">toevoegen aan favorieten</label>
+        </section>
+        <section class="test">
+          <input type="radio" id="blacklist" name="addToDB" value="blacklist" />
+          <label for="blacklist">toevoegen aan blacklist</label>
+        </section>
+        <textarea
+          id="blacklistReden"
+          name="blacklistReden"
+          rows="4"
+          cols="50"
+          placeholder="Geef een reden voor de blacklist"
+        ></textarea>
+        <br /><button type="submit">Submit</button>
+      </form>
+      <% }else{ %>
+      <h2>Gefeliciteerd!</h2>
+      <p>Je hebt een score van <%= score/2 %>/10</p>
+      <% } %>
+    </article>
   </section>
 </main>
 <%- include('./partials/footer'); %>
