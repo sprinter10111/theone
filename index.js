@@ -293,11 +293,7 @@ let doSomeDBCalls = async () => {
           console.log(err);
         }
       })
-      let filteredFavorites = [...favorites];
-      if (req.query.filter != undefined){
-        filteredFavorites = favorites.filter(e => e.character === req.query.filter);
-      }
-      res.render("favorites", { favorites: filteredFavorites });
+      res.render("favorites", { favorites: favorites });
     });
 
     app.get("/addedfavorite", async (req, res) => {
@@ -350,17 +346,17 @@ let doSomeDBCalls = async () => {
       await client.close();
     });
 
-    app.post("/printFavorites", (req, res) => {
+    app.post("/printfavorites", (req, res) => {
       res.download('./public/favorites.txt');
     });
 
-     /*app.listen(app.get("port"), () =>
+     app.listen(app.get("port"), () =>
        console.log("[server] http://localhost:" + app.get("port"))
-     );*/
-    
+     );
+    /*
     app.set('port', (process.env.PORT || 5000));
     app.listen(app.get('port'), function() { });
-    
+    */
     // Make the appropriate DB calls
     //...
   } catch (e) {
