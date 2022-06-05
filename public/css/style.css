@@ -255,10 +255,15 @@ footer {
   margin: 1rem;
   padding: 1rem;
   min-height: 44rem;
-  min-width: 60%;
-  color:white;
-  
+  min-width: 60%;  
 }
+
+  .blacklist_section, .favorites_section, .highscore_section{
+    color:white;
+
+  }
+  
+
 .blacklist{
   margin: 1rem;
   padding: 1rem;
